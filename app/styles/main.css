@@ -162,3 +162,10 @@ iron-pages:not([style-scope]):not(.style-scope){
 .reviews paper-material{
   padding:10px;
 }
+#loading{
+  width:100%;
+  margin-right: auto;
+  margin-left: auto;
+  text-align: center;
+  display: none;
+}
