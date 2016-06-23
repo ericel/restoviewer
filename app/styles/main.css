@@ -177,6 +177,14 @@ iron-pages:not([style-scope]):not(.style-scope){
   font-size: 1em;
 }
 .footer {
-  margin-top: 10px;
+  clear:both;
+  margin-top: 20px;
+  text-align: center;
+  padding:10px;
+  font-size: 0.8em;
+  color:#544E4E;
+}
+.no-resto {
+  color: #F10202;
   text-align: center;
 }

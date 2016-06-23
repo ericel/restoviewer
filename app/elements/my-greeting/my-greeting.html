@@ -94,12 +94,13 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 </div>
                 <div class="clearfix"></div>
                 <div class="btn-align">
-               <paper-button raised class="custom green" id="submitbtn"><!--<paper-spinner id="spinnerRest"></paper-spinner>--> Find A Restaurant</paper-button>
+               <paper-button raised class="custom green" id="submitbtn"><!--<paper-spinner id="spinnerRest"></paper-spinner>-->Find A Restaurant</paper-button>
                 </div>
 
               </form>
     </div>
-    <div id="results"><div id="loading"><paper-spinner-lite id="spinnerlite" class="thick"></paper-spinner-lite> <em>please wait</em></div></div>
+    <div id="loading"><paper-spinner-lite id="spinnerlite" class="thick"></paper-spinner-lite> <em>please wait</em></div>
+    <div id="results"></div>
     <!--<div class="card">
       <iron-image style="width:100%; height:150px;" sizing="cover"
   src="http://lorempixel.com/600/400"></iron-image>
@@ -165,19 +166,30 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           xmlhttp.onreadystatechange = function() {
               if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
                   var reviewer = JSON.parse(xmlhttp.responseText);
-                  runsearch(reviewer);
-                 //console.log(reviewer);
+                  spinnerRestoLite.active = true;
+                  loading.style.display = "block";
+                  setTimeout(function(){ 
+                    if(runsearch(reviewer)){
+                      spinnerRestoLite.active = false;
+                      loading.style.display = "none";
+                    } 
+                   }, 3000);
+
 
            submitBtn.addEventListener('click', function()
               {
                
-               
-
                   event.preventDefault();
                   //spinnerResto.active = true;
                   spinnerRestoLite.active = true;
                   loading.style.display = "block";
-                  setTimeout(function(){ runsearch(reviewer)  }, 3000);
+                  setTimeout(function(){ 
+                    if(runsearch(reviewer)){
+                      spinnerRestoLite.active = false;
+                      loading.style.display = "none";
+                    } 
+                   }, 3000);
+                   
               });
             
           }
@@ -187,24 +199,25 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           xmlhttp.send();
 
           function runsearch(array){
+
                 var rest_typeOf = rest_typeOfID.value,
                      rest_priceOf = rest_priceOfID.value,
                      rest_ratingOf = rest_ratingOfID.value;
 
-                      console.log(rest_typeOf);
-                console.log(rest_priceOf);
-                console.log(rest_ratingOf);
-
           var apijson = array;
-
+          var resto = '';
           var filtered =  apijson.filter(function(item) {
             return item.rest_type === rest_typeOf && item.rest_price === rest_priceOf && item.rest_rating === rest_ratingOf;
           });
-         
-          
+
+          if(filtered.length === 0){
+             resto ='<paper-material elevation="1" class="no-resto">Oops! No restaurants returned. Change your search settings!.</paper-material>';
+           }
+
+
+          try {
           var i = 0,
-              ratstar = '',
-              resto = '';
+              ratstar = '';
           for (i = 0; i < filtered.length; i++) {
                if(filtered[i].rest_rating === 'One Star'){
                   ratstar ='<paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button><paper-icon-button icon="icons:star-border" class="fill_star"></paper-icon-button><paper-icon-button icon="icons:star-border" class="fill_star"></paper-icon-button><paper-icon-button icon="icons:star-border" class="fill_star"></paper-icon-button><paper-icon-button icon="icons:star-border" class="fill_star"></paper-icon-button>';
@@ -217,12 +230,16 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 } else if (filtered[i].rest_rating === 'Five Stars'){
                   ratstar ='<paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button><paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button><paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button><paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button><paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button>';
                 } 
-               resto += '<div class="card"><iron-image style="width:100%; height:150px;" sizing="cover" src="http://lorempixel.com/600/400"></iron-image><div class="innertube"> <div class="rat-stars">'+ratstar+'</div><h4><a href="/restaurant/1">'+filtered[i].rest_name+'<span class="push-right">Reviews</span></h4></a><p><p>'+filtered[i].rest_reviews.substr(0, 50)+'...</p><b><iron-icon prefix icon="maps:place"></iron-icon>'+filtered[i].rest_address+'</b></div></div>';
+               resto += '<div class="card"><iron-image style="width:100%; height:150px;" sizing="cover" src="http://lorempixel.com/600/400"></iron-image><div class="innertube"> <div class="rat-stars">'+ratstar+'</div><h4><a href="/restaurant/'+filtered[i].rest_name+'">'+filtered[i].rest_name+'<span class="push-right">Reviews</span></h4></a><p><p>'+filtered[i].rest_reviews.substr(0, 50)+'...</p><b><iron-icon prefix icon="maps:place"></iron-icon>'+filtered[i].rest_address+'</b></div></div>';
           }
-          //console.log(resto);
-          results.innerHTML = resto;
-          spinnerRestoLite.active = false;
-          loading.style.display = "none";   
+
+          
+           } catch(e) {
+  
+              resto = '<paper-material elevation="1" class="no-resto">Something weird happened. Try again later!</paper-material>'
+           }
+           results.innerHTML = resto;
+           return true;
         }
 
         
