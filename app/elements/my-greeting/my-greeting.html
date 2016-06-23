@@ -47,7 +47,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
      <form is="iron-form" id="restForm">
            <div class="pull-left"> 
            <div class="unfocused-line style-scope paper-input-container"></div>
-           <paper-input label=" Food Type" type="text" id="rest_type" required list="flist" autofocus >
+           <paper-input label=" Food Type" type="text" id="rest_type" required list="flist" autofocus value="Casual dining">
                   <iron-icon prefix icon="maps:restaurant-menu"></iron-icon>
                   <paper-icon-button suffix onclick="clearInput()" icon="clear" alt="clear" title="clear">
                   </paper-icon-button>
@@ -65,7 +65,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
                 <div class="pull-right">
                 <div class="unfocused-line style-scope paper-input-container"></div>
-                   <paper-input label=" Price" type="text" id="rest_price" required list="plist" autofocus >
+                   <paper-input label=" Price" type="text" id="rest_price" required list="plist" autofocus value="Middle Class">
                   <iron-icon prefix icon="maps:local-atm"></iron-icon>
                   <paper-icon-button suffix onclick="clearInput2()" icon="clear" alt="clear" title="clear">
                   </paper-icon-button>
@@ -79,7 +79,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 </div>
                  <div class="pull-right-x">
                  <div class="unfocused-line style-scope paper-input-container"></div>
-                   <paper-input label=" Rating" type="text" id="rest_rating" required list="rlist" autofocus >
+                   <paper-input label=" Rating" type="text" id="rest_rating" required list="rlist" autofocus value="Three Stars">
                   <iron-icon prefix icon="star"></iron-icon>
                   <paper-icon-button suffix onclick="clearInput3()" icon="clear" alt="clear" title="clear">
                   </paper-icon-button>
@@ -153,9 +153,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           var rest_typeOfID = document.querySelector('#rest_type'),
              rest_priceOfID = document.querySelector('#rest_price'),
              rest_ratingOfID = document.querySelector('#rest_rating');
-         var rest_typeOf = rest_typeOfID.value,
-             rest_priceOf = rest_priceOfID.value,
-             rest_ratingOf = rest_ratingOfID.value;
+         
           var  submitBtn = document.querySelector('#submitbtn');
           //var spinnerResto = document.querySelector('#spinnerRest');
           var spinnerRestoLite = document.querySelector('#spinnerlite');
@@ -167,14 +165,14 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           xmlhttp.onreadystatechange = function() {
               if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
                   var reviewer = JSON.parse(xmlhttp.responseText);
-                  //runsearch(reviewer);
+                  runsearch(reviewer);
                  //console.log(reviewer);
 
            submitBtn.addEventListener('click', function()
               {
-                console.log(rest_typeOf);
-                console.log(rest_priceOf);
-                console.log(rest_ratingOf);
+               
+               
+
                   event.preventDefault();
                   //spinnerResto.active = true;
                   spinnerRestoLite.active = true;
@@ -189,6 +187,14 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           xmlhttp.send();
 
           function runsearch(array){
+                var rest_typeOf = rest_typeOfID.value,
+                     rest_priceOf = rest_priceOfID.value,
+                     rest_ratingOf = rest_ratingOfID.value;
+
+                      console.log(rest_typeOf);
+                console.log(rest_priceOf);
+                console.log(rest_ratingOf);
+
           var apijson = array;
 
           var filtered =  apijson.filter(function(item) {
@@ -207,11 +213,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 } else if (filtered[i].rest_rating === 'Three Stars'){
                   ratstar ='<paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button><paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button><paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button><paper-icon-button icon="icons:star-border" class="fill_star"></paper-icon-button><paper-icon-button icon="icons:star-border" class="fill_star"></paper-icon-button>';
                 } else if (filtered[i].rest_rating === 'Four Stars'){
-                  ratstar ='<paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button><paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button><paper-icon-button icon="icons:star-border" class="fill_star"></paper-icon-button><paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button><paper-icon-button icon="icons:star-border" class="fill_star"></paper-icon-button>';
+                  ratstar ='<paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button><paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button><paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button><paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button><paper-icon-button icon="icons:star-border" class="fill_star"></paper-icon-button>';
                 } else if (filtered[i].rest_rating === 'Five Stars'){
-                  ratstar ='<paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button><paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button><paper-icon-button icon="icons:star-border" class="fill_star"></paper-icon-button><paper-icon-button icon="icons:star-border" class="fill_star"></paper-icon-button><paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button>';
+                  ratstar ='<paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button><paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button><paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button><paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button><paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button>';
                 } 
-               resto += '<div class="card"><iron-image style="width:100%; height:150px;" sizing="cover" src="http://lorempixel.com/600/400"></iron-image><div class="innertube"> <div class="rat-stars">'+ratstar+'</div><h4><a href="/restaurant/1">'+filtered[i].rest_name+'</h4></a><p><p>Lorem ipsum dolor sit amet, per in nusquam nominavi periculis, sit elit oportere ea.Lorem ipsum dolor sit amet, per in nusquam nominavi periculis, sit elit oportere ea.Cu mei vide viris gloriatur, at populo eripuit sit.</p><b>{{value}}</b></div></div>';
+               resto += '<div class="card"><iron-image style="width:100%; height:150px;" sizing="cover" src="http://lorempixel.com/600/400"></iron-image><div class="innertube"> <div class="rat-stars">'+ratstar+'</div><h4><a href="/restaurant/1">'+filtered[i].rest_name+'<span class="push-right">Reviews</span></h4></a><p><p>'+filtered[i].rest_reviews.substr(0, 50)+'...</p><b><iron-icon prefix icon="maps:place"></iron-icon>'+filtered[i].rest_address+'</b></div></div>';
           }
           //console.log(resto);
           results.innerHTML = resto;

@@ -13,7 +13,9 @@ body {
    font-family:'Roboto', 'Noto', sans-serif;
   color: #333;
 }
-
+a {
+  color:#4caf50;
+}
 .page-title {
   outline: none;
 }
@@ -79,6 +81,7 @@ body {
     .card {
       width:24%;
      float: left;
+     height: 400px;
     }
     .pull-left {
       float:left;
@@ -168,4 +171,12 @@ iron-pages:not([style-scope]):not(.style-scope){
   margin-left: auto;
   text-align: center;
   display: none;
+}
+.push-right{
+  float: right;
+  font-size: 1em;
+}
+.footer {
+  margin-top: 10px;
+  text-align: center;
 }
