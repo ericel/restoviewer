@@ -29,8 +29,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
      <div class="layout vertical">
     
       <div class="l-grid">
-       <iron-image style="width:100%; height:150px;" sizing="cover"
-  src="http://lorempixel.com/600/400"></iron-image>
+       <div id="restimg"></div>
       <div class="innertube">
       
       <h4> <span id="restname"></span>'s Restaurant</h4>
@@ -43,23 +42,38 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     <div class="l-grid-1">
       <h1 class="page-title" tabindex="-1">Restaurant Review</h1>
        <div class="unfocused-line style-scope paper-input-container"></div>
+       <form is="iron-form" id="reviewForm">
       <b>Click To Rate:</b>
        <div class="unfocused-line style-scope paper-input-container"></div>
+
        <div class="rat-stars big-icon">
-       <paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button>
-       <paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button>
-       <paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button>
+       <span id="star1">
        <paper-icon-button icon="icons:star-border" class="fill_star"></paper-icon-button>
+       </span>
+       <span id="star2">
        <paper-icon-button icon="icons:star-border" class="fill_star"></paper-icon-button>
+       </span>
+       <span id="star3">
+       <paper-icon-button icon="icons:star-border" class="fill_star"></paper-icon-button>
+       </span>
+       <span id="star4">
+       <paper-icon-button icon="icons:star-border" class="fill_star"></paper-icon-button>
+       </span>
+       <span id="star5">
+       <paper-icon-button icon="icons:star-border" class="fill_star"></paper-icon-button>
+       </span>
+       <input id="starwars" value="0">
       </div>
       <div class="txt-review">
        <div class="unfocused-line style-scope paper-input-container"></div>
-      <form>
+      
       <b>Say something about this restaurant:</b>
       <div class="unfocused-line style-scope paper-input-container"></div>
-         <paper-textarea label="autoresizing textarea input"></paper-textarea>
+         <paper-textarea label="Add a comment" id="comment" value=""></paper-textarea>
+
          <div class="btn-align">
-               <paper-button raised class="custom green" id="idRest"><paper-spinner id="spinner"></paper-spinner> Post Review</paper-button>
+         <div id="status"></div>
+               <paper-button raised class="custom green" id="idRest" onclick="_reviewSubmit(event)"><paper-spinner id="spinnerreview"></paper-spinner>Post Review</paper-button>
                 </div>
       </form>
       </div>
@@ -105,12 +119,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           }
         },
         _routeParams: function(newValue) {
-           console.log('route params: ', newValue.name);
+          /* console.log('route params: ', newValue);
            String.prototype.capitalize = function() {
               return this.charAt(0).toUpperCase() + this.slice(1);
-          }
-           var routeparams = (newValue.name).capitalize();
-           console.log(routeparams);
+          }*/
+           var routeparams = newValue.name;
 
             var xmlhttp = new XMLHttpRequest();
           var url = "api.json";
@@ -118,15 +131,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           xmlhttp.onreadystatechange = function() {
               if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
                   var reviewer = JSON.parse(xmlhttp.responseText);
-                /*spinnerRestoLite.active = true;
-                loading.style.display = "block";
-                  setTimeout(function(){ 
-                    if(runsearch(reviewer)){
-                      spinnerRestoLite.active = false;
-                      loading.style.display = "none";
-                    } 
-                   }, 3000);
-                   */
                    runsearch(reviewer);
                 }
               };
@@ -135,7 +139,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
              function runsearch(array){
               var apijson = array;
               var filtered =  apijson.filter(function(item) {
-                return item.rest_name === routeparams;
+                return item.rest_id === parseInt(routeparams);
               });
 
              if(filtered.length === 0){
@@ -153,10 +157,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 } else if (filtered[0].rest_rating === 'Five Stars'){
                   ratstar ='<paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button><paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button><paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button><paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button><paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button>';
                 } 
+              var restphoto = '<iron-image style="width:100%; height:150px;" sizing="cover" src="https://restoviewer.firebaseapp.com/images/'+filtered[0].rest_photo+'.jpg"></iron-image>';
               document.querySelector('#ratingstars').innerHTML = ratstar;
               document.querySelector('#address').innerHTML = filtered[0].rest_address;
               document.querySelector('#restname').innerHTML = filtered[0].rest_name;
-             console.log(filtered[0].rest_name);
+              document.querySelector('#restimg').innerHTML = restphoto;
+              //console.log(filtered[0].rest_name);
 
              var reviews = '<paper-material elevation="1"><iron-icon prefix icon="social:person"></iron-icon> <b>'+filtered[0].rest_reviewer+'</b> Date: '+filtered[0].rest_review_date+'<div class=" small-icon"> <iron-icon prefix icon="star"></iron-icon> <b> Rating : </b>'+ratstar+'</div><p><iron-icon prefix icon="communication:textsms"></iron-icon> <b> Review : </b> '+filtered[0].rest_reviews+' </p></paper-material>';
               document.querySelector('#reviews').innerHTML = reviews;
@@ -164,9 +170,68 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
               document.querySelector('#reviews').innerHTML = document.querySelector('#reviews').innerHTML + dirtMock;
           
            } // end function
-
+           var star1 = document.querySelector('#star1'),
+               star2 = document.querySelector('#star2'),
+               star3 = document.querySelector('#star3'),
+               star4 = document.querySelector('#star4'),
+               star5 = document.querySelector('#star5'),
+               starwars = document.querySelector('#starwars');
+             
+          star1.addEventListener('click', function(){
+             star1.innerHTML = '<paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button>';
+             starwars.value = "One Star";
+          });
+           star2.addEventListener('click', function(){
+             star1.innerHTML = '<paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button>';
+             star2.innerHTML = '<paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button>';
+             starwars.value = 'Two Stars';
+          });
+           star3.addEventListener('click', function(){
+             star1.innerHTML = '<paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button>';
+             star2.innerHTML = '<paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button>';
+             star3.innerHTML = '<paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button>';
+             starwars.value = 'Three Stars';
+          });
+           star4.addEventListener('click', function(){
+             star1.innerHTML = '<paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button>';
+             star2.innerHTML = '<paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button>';
+             star3.innerHTML = '<paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button>';
+             star4.innerHTML = '<paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button>';
+             starwars.value = 'Four Stars';
+          });
+            star5.addEventListener('click', function(){
+             star1.innerHTML = '<paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button>';
+             star2.innerHTML = '<paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button>';
+             star3.innerHTML = '<paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button>';
+             star4.innerHTML = '<paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button>';
+             star5.innerHTML = '<paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button>';
+             starwars.value = 'Five Stars';
+          });
+            
           }
       });
     })();
+    function _reviewSubmit(event) {
+      event.preventDefault();
+    var spinnerreview = document.querySelector('#spinnerreview');
+    var comment = document.querySelector('#comment'),
+        status = document.querySelector('#status'),
+        reviewForm = document.querySelector('#reviewForm'),
+        commentVal = comment.value,
+        starwarsVal = starwars.value;
+    spinnerreview.active = true;
+    spinnerreview.hidden = false;
+    if(starwarsVal === '0') {
+      status.innerHTML = 'Click on Stars to rate';
+    } else if(commentVal.length < 5) {
+      status.innerHTML = 'Add a comment to review. Atleast 5 characters';
+    } else {
+        window.scrollTo(0,0);
+              reviewForm.innerHTML = '<div class="success">Thank you! Review successfully posted!</div>';
+              app.$.toast.text = 'Review Post Successfully!';
+              app.$.toast.show();
+    }
+       
+    }
   </script>
 </dom-module>

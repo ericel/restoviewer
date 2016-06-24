@@ -134,6 +134,9 @@ a {
     margin-left: auto;
     text-align: center;
   }
+  .btn-align paper-button {
+    width : 100%;
+  }
  h1.title-find {
        margin: 2px 0;
        text-align: center;
@@ -171,6 +174,7 @@ iron-pages:not([style-scope]):not(.style-scope){
   margin-left: auto;
   text-align: center;
   display: none;
+  padding: 10px;
 }
 .push-right{
   float: right;
@@ -191,4 +195,11 @@ iron-pages:not([style-scope]):not(.style-scope){
 h4 span{
     /* font-size: 14px; */
     /* font-weight: 500; */
+}
+#status {
+  color:#FB0606;
+}
+.success {
+  padding: 10px;
+  color: #58A836;
 }
