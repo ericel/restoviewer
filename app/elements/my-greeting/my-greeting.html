@@ -230,7 +230,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 } else if (filtered[i].rest_rating === 'Five Stars'){
                   ratstar ='<paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button><paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button><paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button><paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button><paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button>';
                 } 
-               resto += '<div class="card"><iron-image style="width:100%; height:150px;" sizing="cover" src="http://lorempixel.com/600/400"></iron-image><div class="innertube"> <div class="rat-stars">'+ratstar+'</div><h4><a href="/restaurant/'+filtered[i].rest_name+'">'+filtered[i].rest_name+'<span class="push-right">Reviews</span></h4></a><p><p>'+filtered[i].rest_reviews.substr(0, 50)+'...</p><b><iron-icon prefix icon="maps:place"></iron-icon>'+filtered[i].rest_address+'</b></div></div>';
+               resto += '<div class="card"><iron-image style="width:100%; height:150px;" sizing="cover" src="http://lorempixel.com/600/400"></iron-image><div class="innertube"> <div class="rat-stars">'+ratstar+'</div><h4><a href="/restaurant/'+filtered[i].rest_name.toLowerCase()+'">'+filtered[i].rest_name+'<span class="push-right">Reviews</span></h4></a><p><p>'+filtered[i].rest_reviews.substr(0, 50)+'...</p><b><iron-icon prefix icon="maps:place"></iron-icon>'+filtered[i].rest_address+'</b></div></div>';
           }
 
           

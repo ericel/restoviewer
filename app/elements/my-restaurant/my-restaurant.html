@@ -24,10 +24,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           width: 60px;
       }
 
-      span,
-      input {
-        @apply(--paper-font-body2);
-      }
+    
     </style>
      <div class="layout vertical">
     
@@ -36,8 +33,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   src="http://lorempixel.com/600/400"></iron-image>
       <div class="innertube">
       
-      <h4>Ut labores minimum atomorum pro. Laudem tibique ut has.</h4><p>
-      <p><iron-icon prefix icon="maps:place"></iron-icon> 64 Copeland Dr, Mansfield, MA 02048</p>
+      <h4> <span id="restname"></span>'s Restaurant</h4>
+      <span id="ratingstars"></span>
+      <p>
+      <p><iron-icon prefix icon="maps:place"></iron-icon> <span id="address"></span></p>
+      <p><iron-icon prefix icon="date-range"></iron-icon> Mons - Sats: 9AM ~ 10pm</p>
       </div>
     </div>
     <div class="l-grid-1">
@@ -69,7 +69,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
      <div class="reviews">
         <h1> Customer Reviews: </h1>
         <div class="unfocused-line style-scope paper-input-container"></div>
-        <paper-material elevation="1">
+  
+
+        <!-- <paper-material elevation="1">
          <iron-icon prefix icon="social:person"></iron-icon> <b>Eric Oj</b> about 5 mins ago.
          <div class=" small-icon">
          <iron-icon prefix icon="star"></iron-icon> <b> Rating : </b>
@@ -82,70 +84,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         <p>
         <iron-icon prefix icon="communication:textsms"></iron-icon> <b> Review : </b> nusquam nominavi periculis, sit elit oportere ea.Cu mei vide viris gloriatur, at populo eripuit sit.
         </p>
-        </paper-material>
+        </paper-material>-->
 
-         <paper-material elevation="1">
-         <iron-icon prefix icon="social:person"></iron-icon> <b>Eric Oj</b> about 5 mins ago.
-         <div class=" small-icon">
-         <iron-icon prefix icon="star"></iron-icon> <b> Rating : </b>
-         <paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button>
-         <paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button>
-         <paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button>
-         <paper-icon-button icon="icons:star-border" class="fill_star"></paper-icon-button>
-         <paper-icon-button icon="icons:star-border" class="fill_star"></paper-icon-button>
-        </div>
-        <p>
-        <iron-icon prefix icon="communication:textsms"></iron-icon> <b> Review : </b> nusquam nominavi periculis, sit elit oportere ea.Cu mei vide viris gloriatur, at populo eripuit sit.
-        </p>
-        </paper-material>
+         <div id="reviews"></div>
 
 
-         <paper-material elevation="1">
-         <iron-icon prefix icon="social:person"></iron-icon> <b>Eric Oj</b> about 5 mins ago.
-         <div class=" small-icon">
-         <iron-icon prefix icon="star"></iron-icon> <b> Rating : </b>
-         <paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button>
-         <paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button>
-         <paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button>
-         <paper-icon-button icon="icons:star-border" class="fill_star"></paper-icon-button>
-         <paper-icon-button icon="icons:star-border" class="fill_star"></paper-icon-button>
-        </div>
-        <p>
-        <iron-icon prefix icon="communication:textsms"></iron-icon> <b> Review : </b> nusquam nominavi periculis, sit elit oportere ea.Cu mei vide viris gloriatur, at populo eripuit sit.
-        </p>
-        </paper-material>
-
-         <paper-material elevation="1">
-         <iron-icon prefix icon="social:person"></iron-icon> <b>Eric Oj</b> about 5 mins ago.
-         <div class=" small-icon">
-         <iron-icon prefix icon="star"></iron-icon> <b> Rating : </b>
-         <paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button>
-         <paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button>
-         <paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button>
-         <paper-icon-button icon="icons:star-border" class="fill_star"></paper-icon-button>
-         <paper-icon-button icon="icons:star-border" class="fill_star"></paper-icon-button>
-        </div>
-        <p>
-        <iron-icon prefix icon="communication:textsms"></iron-icon> <b> Review : </b> nusquam nominavi periculis, sit elit oportere ea.Cu mei vide viris gloriatur, at populo eripuit sit.
-        </p>
-        </paper-material>
-
-         <paper-material elevation="1">
-         <iron-icon prefix icon="social:person"></iron-icon> <b>Eric Oj</b> about 5 mins ago.
-         <div class=" small-icon">
-         <iron-icon prefix icon="star"></iron-icon> <b> Rating : </b>
-         <paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button>
-         <paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button>
-         <paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button>
-         <paper-icon-button icon="icons:star-border" class="fill_star"></paper-icon-button>
-         <paper-icon-button icon="icons:star-border" class="fill_star"></paper-icon-button>
-        </div>
-        <p>
-        <iron-icon prefix icon="communication:textsms"></iron-icon> <b> Review : </b> nusquam nominavi periculis, sit elit oportere ea.Cu mei vide viris gloriatur, at populo eripuit sit.
-        </p>
-        </paper-material>
-     </div>
-    </div>
   </template>
 
   <script>
@@ -162,7 +105,66 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           }
         },
         _routeParams: function(newValue) {
-           console.log('route params: ', newValue);
+           console.log('route params: ', newValue.name);
+           String.prototype.capitalize = function() {
+              return this.charAt(0).toUpperCase() + this.slice(1);
+          }
+           var routeparams = (newValue.name).capitalize();
+           console.log(routeparams);
+
+            var xmlhttp = new XMLHttpRequest();
+          var url = "api.json";
+
+          xmlhttp.onreadystatechange = function() {
+              if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                  var reviewer = JSON.parse(xmlhttp.responseText);
+                /*spinnerRestoLite.active = true;
+                loading.style.display = "block";
+                  setTimeout(function(){ 
+                    if(runsearch(reviewer)){
+                      spinnerRestoLite.active = false;
+                      loading.style.display = "none";
+                    } 
+                   }, 3000);
+                   */
+                   runsearch(reviewer);
+                }
+              };
+             xmlhttp.open("GET", url, true);
+             xmlhttp.send();
+             function runsearch(array){
+              var apijson = array;
+              var filtered =  apijson.filter(function(item) {
+                return item.rest_name === routeparams;
+              });
+
+             if(filtered.length === 0){
+               console.log('<paper-material elevation="1" class="no-resto">Oops! No restaurants returned. Change your search settings!.</paper-material>');
+             }
+             var ratstar = '';
+             if(filtered[0].rest_rating === 'One Star'){
+                  ratstar ='<paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button><paper-icon-button icon="icons:star-border" class="fill_star"></paper-icon-button><paper-icon-button icon="icons:star-border" class="fill_star"></paper-icon-button><paper-icon-button icon="icons:star-border" class="fill_star"></paper-icon-button><paper-icon-button icon="icons:star-border" class="fill_star"></paper-icon-button>';
+                } else if (filtered[0].rest_rating === 'Two Stars'){
+                  ratstar ='<paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button><paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button><paper-icon-button icon="icons:star-border" class="fill_star"></paper-icon-button><paper-icon-button icon="icons:star-border" class="fill_star"></paper-icon-button><paper-icon-button icon="icons:star-border" class="fill_star"></paper-icon-button>';
+                } else if (filtered[0].rest_rating === 'Three Stars'){
+                  ratstar ='<paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button><paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button><paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button><paper-icon-button icon="icons:star-border" class="fill_star"></paper-icon-button><paper-icon-button icon="icons:star-border" class="fill_star"></paper-icon-button>';
+                } else if (filtered[0].rest_rating === 'Four Stars'){
+                  ratstar ='<paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button><paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button><paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button><paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button><paper-icon-button icon="icons:star-border" class="fill_star"></paper-icon-button>';
+                } else if (filtered[0].rest_rating === 'Five Stars'){
+                  ratstar ='<paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button><paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button><paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button><paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button><paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button>';
+                } 
+              document.querySelector('#ratingstars').innerHTML = ratstar;
+              document.querySelector('#address').innerHTML = filtered[0].rest_address;
+              document.querySelector('#restname').innerHTML = filtered[0].rest_name;
+             console.log(filtered[0].rest_name);
+
+             var reviews = '<paper-material elevation="1"><iron-icon prefix icon="social:person"></iron-icon> <b>'+filtered[0].rest_reviewer+'</b> Date: '+filtered[0].rest_review_date+'<div class=" small-icon"> <iron-icon prefix icon="star"></iron-icon> <b> Rating : </b>'+ratstar+'</div><p><iron-icon prefix icon="communication:textsms"></iron-icon> <b> Review : </b> '+filtered[0].rest_reviews+' </p></paper-material>';
+              document.querySelector('#reviews').innerHTML = reviews;
+              var dirtMock = '<div><paper-material elevation="1"><iron-icon prefix icon="social:person"></iron-icon> <b>Jeremy</b> Date: 07/01/2016<div class=" small-icon"><iron-icon prefix icon="star"></iron-icon> <b> Rating : </b> <paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button><paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button><paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button><paper-icon-button icon="icons:star-border" class="fill_star"></paper-icon-button><paper-icon-button icon="icons:star-border" class="fill_star"></paper-icon-button></div> <p><iron-icon prefix icon="communication:textsms"></iron-icon> <b> Review : </b> nusquam nominavi periculis, sit elit oportere ea.Cu mei vide viris gloriatur, at populo eripuit sit.</p></paper-material></div><paper-material elevation="1"><iron-icon prefix icon="social:person"></iron-icon> <b>Mark</b> Date: 15/01/2016<div class=" small-icon"> <iron-icon prefix icon="star"></iron-icon> <b> Rating : </b> <paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button><paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button> <paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button><paper-icon-button icon="icons:star-border" class="fill_star"></paper-icon-button><paper-icon-button icon="icons:star-border" class="fill_star"></paper-icon-button></div><p><iron-icon prefix icon="communication:textsms"></iron-icon> <b> Review : </b> nusquam nominavi periculis, sit elit oportere ea.Cu mei vide viris gloriatur, at populo eripuit sit. </p></paper-material><paper-material elevation="1"><iron-icon prefix icon="social:person"></iron-icon> <b>Eric Oj</b> Date: 30/01/2016<div class=" small-icon"><iron-icon prefix icon="star"></iron-icon> <b> Rating : </b> <paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button><paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button><paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button><paper-icon-button icon="star" class="fill_star"></paper-icon-button><paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button></div><p><iron-icon prefix icon="communication:textsms"></iron-icon><b> Review : </b> nusquam nominavi periculis, sit elit oportere ea.Cu mei vide viris gloriatur, at populo eripuit sit. </p></paper-material></div></div></div>'
+              document.querySelector('#reviews').innerHTML = document.querySelector('#reviews').innerHTML + dirtMock;
+          
+           } // end function
+
           }
       });
     })();

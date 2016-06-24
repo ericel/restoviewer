@@ -188,3 +188,7 @@ iron-pages:not([style-scope]):not(.style-scope){
   color: #F10202;
   text-align: center;
 }
+h4 span{
+    /* font-size: 14px; */
+    /* font-weight: 500; */
+}
