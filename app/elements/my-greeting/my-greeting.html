@@ -42,7 +42,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                   </paper-icon-button>
                 </paper-input>
                  <datalist id="flist">
-                  <option value="All Types">
                   <option value="Fast food">
                   <option value="Family style">
                   <option value="Mongolian barbecue">
@@ -60,7 +59,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                   </paper-icon-button>
                 </paper-input>
                 <datalist id="plist">
-                  <option value="All Types">
                   <option value="Low Price">
                   <option value="Middle Class">
                   <option value="Luxury">
@@ -90,26 +88,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     </div>
     <div id="loading"><paper-spinner-lite id="spinnerlite" class="thick"></paper-spinner-lite> <em>please wait</em></div>
     <div id="results"></div>
-    <!--<div class="card">
-      <iron-image style="width:100%; height:150px;" sizing="cover"
-  src="http://lorempixel.com/600/400"></iron-image>
-      <div class="innertube">
-      <div class="rat-stars">
-       <paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button>
-       <paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button>
-       <paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button>
-       <paper-icon-button icon="icons:star-border" class="fill_star"></paper-icon-button>
-       <paper-icon-button icon="icons:star-border" class="fill_star"></paper-icon-button>
-      </div>
-      <h4><a href="/restaurant/1">Ut labores minimum atomorum pro. Laudem tibique ut has.</h4></a><p>
-      <p>Lorem ipsum dolor sit amet, per in nusquam nominavi periculis, sit elit oportere ea.Lorem ipsum dolor sit amet, per in nusquam nominavi periculis, sit elit oportere ea.Cu mei vide viris gloriatur, at populo eripuit sit.</p>
-      <b>{{value}}</b>
-      </div>
-    </div>-->
-
-    
-
-   <geo-location id="geolocation" watch-pos latitude="{{ lati}}" longitude="{{ long }}"></geo-location>
+   <!--<geo-location id="geolocation" watch-pos latitude="{{ lati}}" longitude="{{ long }}"></geo-location>-->
 </div>
 </paper-material>
   </template>
@@ -141,9 +120,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           //if (sessionStorage.getItem("is_reloaded")){ 
           //alert('Reloaded!')
           // };
-          var loc = this.$.geolocation;
-          loc.addEventListener('geo-response', function(e) {
+          //var loc = this.$.geolocation;
+          //loc.addEventListener('geo-response', function(e) {
           //console.log(this.latitude, 'lng:' + this.longitude);
+          window.addEventListener('load', function(e) {
           var rest_typeOfID = document.querySelector('#rest_type'),
              rest_priceOfID = document.querySelector('#rest_price'),
              rest_ratingOfID = document.querySelector('#rest_rating');
