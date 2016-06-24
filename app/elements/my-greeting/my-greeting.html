@@ -23,12 +23,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         @apply(--paper-font-body2);
       }
     </style>
-
+  <google-maps-api api-key="AIzaSyBOJ0zpAeQQiksYE0i_VgWSMEgFM0aziKg" id="googlemaps" version="3.exp"></google-maps-api>
     <div class="api-map" id="mapmarkers">
-    
-    <!--<google-map-marker latitude="37.779" longitude="-122.3892"
-          draggable="true" title="Go Giants!"  info  animation="BOUNCE" ></google-map-marker>-->
-
+   
     </div>
    <div class="main">
     <div class="searchbox">
@@ -89,6 +86,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     <div id="loading"><paper-spinner-lite id="spinnerlite" class="thick"></paper-spinner-lite> <em>please wait</em></div>
     <div id="results"></div>
    <!--<geo-location id="geolocation" watch-pos latitude="{{ lati}}" longitude="{{ long }}"></geo-location>-->
+    <google-client-loader id="shortener" name="urlshortener" version="v1"></google-client-loader>
+
 </div>
 </paper-material>
   </template>
@@ -116,14 +115,15 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           }
         },
         ready: function() {
-          sessionStorage.setItem("loaded", true);
+          //sessionStorage.setItem("loaded", true);
           //if (sessionStorage.getItem("is_reloaded")){ 
           //alert('Reloaded!')
           // };
           //var loc = this.$.geolocation;
           //loc.addEventListener('geo-response', function(e) {
           //console.log(this.latitude, 'lng:' + this.longitude);
-          window.addEventListener('load', function(e) {
+          var mapsAPI = this.$.googlemaps;
+          mapsAPI.addEventListener('api-load', function(e) {
           var rest_typeOfID = document.querySelector('#rest_type'),
              rest_priceOfID = document.querySelector('#rest_price'),
              rest_ratingOfID = document.querySelector('#rest_rating');
