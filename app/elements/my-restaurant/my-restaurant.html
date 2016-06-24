@@ -62,7 +62,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
        <span id="star5">
        <paper-icon-button icon="icons:star-border" class="fill_star"></paper-icon-button>
        </span>
-       <input id="starwars" value="0">
+       <input id="starwars" value="0" type="hidden">
       </div>
       <div class="txt-review">
        <div class="unfocused-line style-scope paper-input-container"></div>
@@ -83,22 +83,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
      <div class="reviews">
         <h1> Customer Reviews: </h1>
         <div class="unfocused-line style-scope paper-input-container"></div>
-  
 
-        <!-- <paper-material elevation="1">
-         <iron-icon prefix icon="social:person"></iron-icon> <b>Eric Oj</b> about 5 mins ago.
-         <div class=" small-icon">
-         <iron-icon prefix icon="star"></iron-icon> <b> Rating : </b>
-         <paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button>
-         <paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button>
-         <paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button>
-         <paper-icon-button icon="icons:star-border" class="fill_star"></paper-icon-button>
-         <paper-icon-button icon="icons:star-border" class="fill_star"></paper-icon-button>
-        </div>
-        <p>
-        <iron-icon prefix icon="communication:textsms"></iron-icon> <b> Review : </b> nusquam nominavi periculis, sit elit oportere ea.Cu mei vide viris gloriatur, at populo eripuit sit.
-        </p>
-        </paper-material>-->
 
          <div id="reviews"></div>
 
@@ -230,6 +215,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
               reviewForm.innerHTML = '<div class="success">Thank you! Review successfully posted!</div>';
               app.$.toast.text = 'Review Post Successfully!';
               app.$.toast.show();
+              setTimeout(function(){ 
+                reviewForm.reset();
+              }, 3000);
     }
        
     }
