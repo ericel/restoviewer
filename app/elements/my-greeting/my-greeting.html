@@ -24,11 +24,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       }
     </style>
   <google-maps-api api-key="AIzaSyBOJ0zpAeQQiksYE0i_VgWSMEgFM0aziKg" id="googlemaps" version="3.exp"></google-maps-api>
-    <div class="api-map" id="mapmarkers">
+    <div class="api-map" id="mapmarkers" tabindex="0">
    
     </div>
    <div class="main">
-    <div class="searchbox">
+    <div class="searchbox" tabindex="0">
      <h1 class="title-find"> Find A Restaurant To Review</h1>
      <form is="iron-form" id="restForm">
            <div class="pull-left"> 
@@ -213,9 +213,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 } else if (filtered[i].rest_rating === 'Five Stars'){
                   ratstar ='<paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button><paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button><paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button><paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button><paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button>';
                 } 
-                var restphoto = '<iron-image style="width:100%; height:150px;" sizing="cover" src="https://restoviewer.firebaseapp.com/images/'+filtered[i].rest_photo+'.jpg"></iron-image>';
+                var restphoto = '<iron-image style="width:100%; height:150px;" background-color: lightgray;" preload fade sizing="cover" src="https://restoviewer.firebaseapp.com/images/'+filtered[i].rest_photo+'.jpg" alt="'+filtered[i].rest_name+'" id="'+filtered[i].rest_photo+'"></iron-image>';
 
-               resto += '<div class="card">'+restphoto+'<div class="innertube"> <div class="rat-stars">'+ratstar+'</div><h4><a href="/restaurant/'+filtered[i].rest_id+'">'+filtered[i].rest_name+'<span class="push-right">Reviews</span></h4></a><p><p>'+filtered[i].rest_reviews.substr(0, 50)+'...</p><b><iron-icon prefix icon="maps:place"></iron-icon>'+filtered[i].rest_address+'</b></div></div>';
+               resto += '<div class="card" tabindex="0">'+restphoto+'<div class="innertube"> <div class="rat-stars">'+ratstar+'</div><h4><a href="/restaurant/'+filtered[i].rest_id+'" tabindex="0">'+filtered[i].rest_name+'<span class="push-right">Reviews</span></h4></a><p><p>'+filtered[i].rest_reviews.substr(0, 50)+'...</p><b><iron-icon prefix icon="maps:place"></iron-icon>'+filtered[i].rest_address+'</b></div></div>';
                 
                    markers += '<google-map-marker latitude="'+filtered[i].rest_lat+'" longitude="'+filtered[i].rest_long+'" draggable="true" title="Go Giants!"  info  animation="BOUNCE" ></google-map-marker>';
                  
@@ -233,7 +233,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
            return true;
         }
          
-        
+        //document.querySelector('img').id = '';
 
         });
         }

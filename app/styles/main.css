@@ -14,7 +14,7 @@ body {
   color: #333;
 }
 a {
-  color:#4caf50;
+  color:#2d6930;
 }
 .page-title {
   outline: none;
@@ -61,7 +61,7 @@ a {
       }
       .api-map {
         width:100%;
-        height: 350px;
+        height: 300px;
         background: #005B06;
         box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);
       }
@@ -151,7 +151,7 @@ iron-pages:not([style-scope]):not(.style-scope){
 }
 .fill_star{
   font-size: 2em;
-  color: #f09300;
+  color: #59512a;
 
 }
 .paper-input-container-0 .focused-line.paper-input-container {
@@ -201,5 +201,14 @@ h4 span{
 }
 .success {
   padding: 10px;
-  color: #58A836;
+  color: #2d6930;
+}
+.l-grid-1 label {
+  display: block;
+}
+.rstar {
+  padding: 15px 0 10px 0;
+}
+.margin20{
+  margin-bottom: 20px;
 }

@@ -12,6 +12,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="../../bower_components/paper-styles/typography.html">
 
 <dom-module id="my-restaurant">
+
   <template>
     <style include="shared-styles">
       :host {
@@ -29,21 +30,27 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
      <div class="layout vertical">
     
       <div class="l-grid">
-       <div id="restimg"></div>
+       <div id="restimg" tabindex="0"></div>
       <div class="innertube">
       
-      <h4> <span id="restname"></span>'s Restaurant</h4>
-      <span id="ratingstars"></span>
-      <p>
-      <p><iron-icon prefix icon="maps:place"></iron-icon> <span id="address"></span></p>
-      <p><iron-icon prefix icon="date-range"></iron-icon> Mons - Sats: 9AM ~ 10pm</p>
+      <h4 tabindex="0"> <span id="restname"></span>'s Restaurant</h4>
+      <p tabindex="0">
+      <span  id="ratingstars"></span>
+      </p>
+      <p tabindex="0"><iron-icon prefix icon="maps:place"></iron-icon> <span id="address"></span></p>
+      <p tabindex="0"><iron-icon prefix icon="date-range"></iron-icon> Mons - Sats: 9AM ~ 10pm</p>
+       
       </div>
     </div>
-    <div class="l-grid-1">
-      <h1 class="page-title" tabindex="-1">Restaurant Review</h1>
+    <div class="l-grid-1" tabindex="0">
+      <h1  class="page-title" tabindex="0">Restaurant Review</h1>
        <div class="unfocused-line style-scope paper-input-container"></div>
        <form is="iron-form" id="reviewForm">
-      <b>Click To Rate:</b>
+       <paper-input name="fullname" id="fullname" label="Full Name" autofocus auto-validate pattern="^[a-zA-Z\s]*$" error-message="Only letters accepted" required></paper-input>
+      
+       <div class="rstar">
+      <b>Rate by Stars</b>
+      <label>Click To Rate:</label>
        <div class="unfocused-line style-scope paper-input-container"></div>
 
        <div class="rat-stars big-icon">
@@ -64,15 +71,17 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
        </span>
        <input id="starwars" value="0" type="hidden">
       </div>
+      </div>
       <div class="txt-review">
        <div class="unfocused-line style-scope paper-input-container"></div>
       
       <b>Say something about this restaurant:</b>
       <div class="unfocused-line style-scope paper-input-container"></div>
-         <paper-textarea label="Add a comment" id="comment" value=""></paper-textarea>
+         <paper-textarea label="Add a comment" id="comment" auto-validate error-message="Review comment needed" value="" required></paper-textarea>
 
          <div class="btn-align">
          <div id="status"></div>
+          <div class="margin20"></div>
                <paper-button raised class="custom green" id="idRest" onclick="_reviewSubmit(event)"><paper-spinner id="spinnerreview"></paper-spinner>Post Review</paper-button>
                 </div>
       </form>
@@ -84,7 +93,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         <h1> Customer Reviews: </h1>
         <div class="unfocused-line style-scope paper-input-container"></div>
 
-
+         <div id="reviewsadded"></div>
          <div id="reviews"></div>
 
 
@@ -103,14 +112,25 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             observer: '_routeParams'
           }
         },
+        ready: function(){
+           var reviewForm = this.$.reviewForm;
+           var idRest = this.$.idRest;
+           var rspinner = this.$.spinnerreview;
+              reviewForm.addEventListener('mouseout', function(event) {
+              idRest.disabled = !reviewForm.validate();
+              rspinner.hidden = true;
+            });
+          
+
+        },
         _routeParams: function(newValue) {
           /* console.log('route params: ', newValue);
            String.prototype.capitalize = function() {
               return this.charAt(0).toUpperCase() + this.slice(1);
           }*/
-           var routeparams = newValue.name;
+         var routeparams = newValue.name;
 
-            var xmlhttp = new XMLHttpRequest();
+          var xmlhttp = new XMLHttpRequest();
           var url = "api.json";
 
           xmlhttp.onreadystatechange = function() {
@@ -127,6 +147,36 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 return item.rest_id === parseInt(routeparams);
               });
 
+               if(routeparams != ''){
+                document.title = filtered[0].rest_name;
+               }
+
+              //Get localstorage from useragent
+              var localST = '';
+              if (typeof(Storage) !== "undefined") {
+                  if(localStorage.getItem("restID") === routeparams){
+                    if(localStorage.stars === 'One Star'){
+                  ratstar ='<paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button><paper-icon-button icon="icons:star-border" class="fill_star"></paper-icon-button><paper-icon-button icon="icons:star-border" class="fill_star"></paper-icon-button><paper-icon-button icon="icons:star-border" class="fill_star"></paper-icon-button><paper-icon-button icon="icons:star-border" class="fill_star"></paper-icon-button>';
+                } else if (localStorage.stars === 'Two Stars'){
+                  ratstar ='<paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button><paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button><paper-icon-button icon="icons:star-border" class="fill_star"></paper-icon-button><paper-icon-button icon="icons:star-border" class="fill_star"></paper-icon-button><paper-icon-button icon="icons:star-border" class="fill_star"></paper-icon-button>';
+                } else if (localStorage.stars === 'Three Stars'){
+                  ratstar ='<paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button><paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button><paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button><paper-icon-button icon="icons:star-border" class="fill_star"></paper-icon-button><paper-icon-button icon="icons:star-border" class="fill_star"></paper-icon-button>';
+                } else if (localStorage.stars === 'Four Stars'){
+                  ratstar ='<paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button><paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button><paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button><paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button><paper-icon-button icon="icons:star-border" class="fill_star"></paper-icon-button>';
+                } else if (localStorage.stars === 'Five Stars'){
+                  ratstar ='<paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button><paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button><paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button><paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button><paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button>';
+                } 
+                    
+                       localST = '<paper-material elevation="1" tabindex="0"><iron-icon prefix icon="social:person"></iron-icon> <b>'+localStorage.names+'</b> Date: '+localStorage.datest+'<div class=" small-icon"> <iron-icon prefix icon="star"></iron-icon> <b> Rating : </b>'+ratstar+'</div><p><iron-icon prefix icon="communication:textsms"></iron-icon> <b> Review : </b> '+localStorage.comments+' </p></paper-material>';
+                    document.querySelector('#reviews').innerHTML = localST;
+                  } else {
+                    document.querySelector('#reviews').innerHTML = localST;
+                  }
+
+              } else {
+                  console.log('Sorry! No Web Storage support..');
+              }
+
              if(filtered.length === 0){
                console.log('<paper-material elevation="1" class="no-resto">Oops! No restaurants returned. Change your search settings!.</paper-material>');
              }
@@ -142,16 +192,16 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 } else if (filtered[0].rest_rating === 'Five Stars'){
                   ratstar ='<paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button><paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button><paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button><paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button><paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button>';
                 } 
-              var restphoto = '<iron-image style="width:100%; height:150px;" sizing="cover" src="https://restoviewer.firebaseapp.com/images/'+filtered[0].rest_photo+'.jpg"></iron-image>';
+              var restphoto = '<iron-image style="width:100%; height:150px;" background-color: lightgray;" preload fade sizing="cover" src="https://restoviewer.firebaseapp.com/images/'+filtered[0].rest_photo+'.jpg" alt="'+filtered[0].rest_name+'" id="'+filtered[0].rest_photo+'"></iron-image>';
               document.querySelector('#ratingstars').innerHTML = ratstar;
               document.querySelector('#address').innerHTML = filtered[0].rest_address;
               document.querySelector('#restname').innerHTML = filtered[0].rest_name;
               document.querySelector('#restimg').innerHTML = restphoto;
               //console.log(filtered[0].rest_name);
 
-             var reviews = '<paper-material elevation="1"><iron-icon prefix icon="social:person"></iron-icon> <b>'+filtered[0].rest_reviewer+'</b> Date: '+filtered[0].rest_review_date+'<div class=" small-icon"> <iron-icon prefix icon="star"></iron-icon> <b> Rating : </b>'+ratstar+'</div><p><iron-icon prefix icon="communication:textsms"></iron-icon> <b> Review : </b> '+filtered[0].rest_reviews+' </p></paper-material>';
-              document.querySelector('#reviews').innerHTML = reviews;
-              var dirtMock = '<div><paper-material elevation="1"><iron-icon prefix icon="social:person"></iron-icon> <b>Jeremy</b> Date: 07/01/2016<div class=" small-icon"><iron-icon prefix icon="star"></iron-icon> <b> Rating : </b> <paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button><paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button><paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button><paper-icon-button icon="icons:star-border" class="fill_star"></paper-icon-button><paper-icon-button icon="icons:star-border" class="fill_star"></paper-icon-button></div> <p><iron-icon prefix icon="communication:textsms"></iron-icon> <b> Review : </b> nusquam nominavi periculis, sit elit oportere ea.Cu mei vide viris gloriatur, at populo eripuit sit.</p></paper-material></div><paper-material elevation="1"><iron-icon prefix icon="social:person"></iron-icon> <b>Mark</b> Date: 15/01/2016<div class=" small-icon"> <iron-icon prefix icon="star"></iron-icon> <b> Rating : </b> <paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button><paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button> <paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button><paper-icon-button icon="icons:star-border" class="fill_star"></paper-icon-button><paper-icon-button icon="icons:star-border" class="fill_star"></paper-icon-button></div><p><iron-icon prefix icon="communication:textsms"></iron-icon> <b> Review : </b> nusquam nominavi periculis, sit elit oportere ea.Cu mei vide viris gloriatur, at populo eripuit sit. </p></paper-material><paper-material elevation="1"><iron-icon prefix icon="social:person"></iron-icon> <b>Eric Oj</b> Date: 30/01/2016<div class=" small-icon"><iron-icon prefix icon="star"></iron-icon> <b> Rating : </b> <paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button><paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button><paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button><paper-icon-button icon="star" class="fill_star"></paper-icon-button><paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button></div><p><iron-icon prefix icon="communication:textsms"></iron-icon><b> Review : </b> nusquam nominavi periculis, sit elit oportere ea.Cu mei vide viris gloriatur, at populo eripuit sit. </p></paper-material></div></div></div>'
+             var reviews = '<paper-material elevation="1" tabindex="0"><iron-icon prefix icon="social:person"></iron-icon> <b>'+filtered[0].rest_reviewer+'</b> Date: '+filtered[0].rest_review_date+'<div class=" small-icon"> <iron-icon prefix icon="star"></iron-icon> <b> Rating : </b>'+ratstar+'</div><p><iron-icon prefix icon="communication:textsms"></iron-icon> <b> Review : </b> '+filtered[0].rest_reviews+' </p></paper-material>';
+              document.querySelector('#reviews').innerHTML = document.querySelector('#reviews').innerHTML + reviews;
+              var dirtMock = '<div><paper-material elevation="1" tabindex="0"><iron-icon prefix icon="social:person"></iron-icon> <b>Jeremy</b> Date: 07/01/2016<div class=" small-icon"><iron-icon prefix icon="star"></iron-icon> <b> Rating : </b> <paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button><paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button><paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button><paper-icon-button icon="icons:star-border" class="fill_star"></paper-icon-button><paper-icon-button icon="icons:star-border" class="fill_star"></paper-icon-button></div> <p><iron-icon prefix icon="communication:textsms"></iron-icon> <b> Review : </b> nusquam nominavi periculis, sit elit oportere ea.Cu mei vide viris gloriatur, at populo eripuit sit.</p></paper-material></div><paper-material elevation="1" tabindex="0"><iron-icon prefix icon="social:person"></iron-icon> <b>Mark</b> Date: 15/01/2016<div class=" small-icon"> <iron-icon prefix icon="star"></iron-icon> <b> Rating : </b> <paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button><paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button> <paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button><paper-icon-button icon="icons:star-border" class="fill_star"></paper-icon-button><paper-icon-button icon="icons:star-border" class="fill_star"></paper-icon-button></div><p><iron-icon prefix icon="communication:textsms"></iron-icon> <b> Review : </b> nusquam nominavi periculis, sit elit oportere ea.Cu mei vide viris gloriatur, at populo eripuit sit. </p></paper-material><paper-material elevation="1" tabindex="0"><iron-icon prefix icon="social:person"></iron-icon> <b>Eric Oj</b> Date: 30/01/2016<div class=" small-icon"><iron-icon prefix icon="star"></iron-icon> <b> Rating : </b> <paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button><paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button><paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button><paper-icon-button icon="star" class="fill_star"></paper-icon-button><paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button></div><p><iron-icon prefix icon="communication:textsms"></iron-icon><b> Review : </b> nusquam nominavi periculis, sit elit oportere ea.Cu mei vide viris gloriatur, at populo eripuit sit. </p></paper-material></div></div></div>'
               document.querySelector('#reviews').innerHTML = document.querySelector('#reviews').innerHTML + dirtMock;
           
            } // end function
@@ -198,18 +248,66 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     })();
     function _reviewSubmit(event) {
       event.preventDefault();
+    var today = new Date();
+    var dd = today.getDate();
+    var mm = today.getMonth()+1; //January is 0!
+    var yyyy = today.getFullYear();
+
+    if(dd<10) {
+        dd='0'+dd
+    } 
+
+    if(mm<10) {
+        mm='0'+mm
+    } 
+ 
+    today = dd+'/'+mm+'/'+yyyy;
     var spinnerreview = document.querySelector('#spinnerreview');
     var comment = document.querySelector('#comment'),
         status = document.querySelector('#status'),
+        name = document.querySelector('#fullname'),
         reviewForm = document.querySelector('#reviewForm'),
+        nameVal = name.value,
         commentVal = comment.value,
         starwarsVal = starwars.value;
-    spinnerreview.active = true;
-    spinnerreview.hidden = false;
+  
+    if(starwarsVal === 'One Star'){
+                  ratstar ='<paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button><paper-icon-button icon="icons:star-border" class="fill_star"></paper-icon-button><paper-icon-button icon="icons:star-border" class="fill_star"></paper-icon-button><paper-icon-button icon="icons:star-border" class="fill_star"></paper-icon-button><paper-icon-button icon="icons:star-border" class="fill_star"></paper-icon-button>';
+                } else if (starwarsVal === 'Two Stars'){
+                  ratstar ='<paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button><paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button><paper-icon-button icon="icons:star-border" class="fill_star"></paper-icon-button><paper-icon-button icon="icons:star-border" class="fill_star"></paper-icon-button><paper-icon-button icon="icons:star-border" class="fill_star"></paper-icon-button>';
+                } else if (starwarsVal === 'Three Stars'){
+                  ratstar ='<paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button><paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button><paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button><paper-icon-button icon="icons:star-border" class="fill_star"></paper-icon-button><paper-icon-button icon="icons:star-border" class="fill_star"></paper-icon-button>';
+                } else if (starwarsVal === 'Four Stars'){
+                  ratstar ='<paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button><paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button><paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button><paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button><paper-icon-button icon="icons:star-border" class="fill_star"></paper-icon-button>';
+                } else if (starwarsVal === 'Five Stars'){
+                  ratstar ='<paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button><paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button><paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button><paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button><paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button>';
+                } 
+      routeparams = document.querySelector('#routeparams').value;
+    if (typeof(Storage) !== "undefined") {
+      if(localStorage.getItem("restID") !== routeparams){
+          localStorage.restID = routeparams;
+        
+   
+          localStorage.names = nameVal;
+       
+          localStorage.stars = starwarsVal;
+        
+       
+          localStorage.comments = commentVal;
+       
+ 
+          localStorage.datest = today;
+        
+        }
+    } else {
+        console.log('Sorry! No Web Storage support');
+    }
     if(starwarsVal === '0') {
       status.innerHTML = 'Click on Stars to rate';
     } else if(commentVal.length < 5) {
       status.innerHTML = 'Add a comment to review. Atleast 5 characters';
+    } else if (name.length < 4){
+      status.innerHTML = 'Add your name. Atleast 4 characters';
     } else {
         window.scrollTo(0,0);
               reviewForm.innerHTML = '<div class="success">Thank you! Review successfully posted!</div>';
@@ -218,6 +316,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
               setTimeout(function(){ 
                 reviewForm.reset();
               }, 3000);
+
+              var posted = '<paper-material elevation="1" tabindex="0"><iron-icon prefix icon="social:person"></iron-icon> <b>'+nameVal+'</b> Date: '+today+'<div class=" small-icon"> <iron-icon prefix icon="star"></iron-icon> <b> Rating : </b>'+ratstar+'</div><p><iron-icon prefix icon="communication:textsms"></iron-icon> <b> Review : </b> '+commentVal+' </p></paper-material>';
+              document.querySelector('#reviewsadded').innerHTML =  posted;
     }
        
     }
