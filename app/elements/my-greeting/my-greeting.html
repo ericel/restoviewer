@@ -33,7 +33,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
      <form is="iron-form" id="restForm">
            <div class="pull-left"> 
            <div class="unfocused-line style-scope paper-input-container"></div>
-           <paper-input label="Restaurant Type" type="text" id="rest_type" required list="flist" autofocus value="Mongolian barbecue" aria-labelledby="restaurant-type" tabindex="0">
+           <!--<paper-input label="Restaurant Type" type="text" id="rest_type" required list="flist" autofocus value="Mongolian barbecue"  tabindex="0">
                   <iron-icon  id="ds" prefix icon="maps:restaurant-menu"></iron-icon>
                   <paper-icon-button id="as" suffix onclick="clearInput()" icon="clear" alt="clear" title="clear">
                   </paper-icon-button>
@@ -45,12 +45,25 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                   <option value="Buffet" tabindex="-1">
                   <option value="Casual dining" tabindex="-1">
                    <option value="Breakfast" tabindex="-1"> 
-                 </datalist>
+                 </datalist>-->
+                    <paper-dropdown-menu label="Restaurant Type" id="rest_type" required value="Mongolian barbecue">
+                      <paper-listbox class="dropdown-content">
+                        <paper-item>Fast food</paper-item>
+                        <paper-item>Family style</paper-item>
+                        <paper-item>Mongolian barbecue</paper-item>
+                        <paper-item>Buffet</paper-item>
+                        <paper-item>Casual dining</paper-item>
+                        <paper-item>Breakfast</paper-item>
+                      </paper-listbox>
+                    </paper-dropdown-menu>
+                    <!--<select id="rest_type">
+                    </select>-->
+
                  </div>
 
                 <div class="pull-right">
-                <div class="unfocused-line style-scope paper-input-container"></div>
-                   <paper-input label=" Restaurant Cost" type="text" id="rest_price" required list="plist" autofocus value="Middle Class" aria-labelledby="restaurant-cost">
+                <div class="unfocused-line style-scope paper-input-container" ></div>
+                  <!-- <paper-input label=" Restaurant Cost" type="text" id="rest_price" required list="plist" autofocus value="Middle Class">
                   <iron-icon id="df" prefix icon="maps:local-atm"></iron-icon>
                   <paper-icon-button id="sd" suffix onclick="clearInput2()" icon="clear" alt="clear" title="clear">
                   </paper-icon-button>
@@ -59,12 +72,18 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                   <option value="Low Price">
                   <option value="Middle Class">
                   <option value="Luxury">
-                 </datalist>
-
+                 </datalist>-->
+                  <paper-dropdown-menu label="Restaurant Cost" id="rest_price" required value="Middle Class">
+                      <paper-listbox class="dropdown-content">
+                        <paper-item>Low Price</paper-item>
+                        <paper-item>Middle Class</paper-item>
+                        <paper-item>Luxury</paper-item>
+                      </paper-listbox>
+                    </paper-dropdown-menu>
                 </div>
                  <div class="pull-right-x">
                  <div class="unfocused-line style-scope paper-input-container"></div>
-                   <paper-input label="Restaurant Rating" type="text" id="rest_rating" required list="rlist" autofocus value="Three Stars" aria-labelledby="restaurant-rating">
+                  <!-- <paper-input label="Restaurant Rating" type="text" id="rest_rating" required list="rlist" autofocus value="Three Stars">
                   <iron-icon id="er" prefix icon="star" ></iron-icon>
                   <paper-icon-button id="sw" suffix onclick="clearInput3()" icon="clear" alt="clear" title="clear">
                   </paper-icon-button>
@@ -75,7 +94,16 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                   <option value="Three Stars">
                   <option value="Four Stars">
                   <option value="Five Stars">
-                 </datalist>
+                 </datalist>-->
+                 <paper-dropdown-menu label="Restaurant Rating" id="rest_rating" required value="Three Stars">
+                      <paper-listbox class="dropdown-content">
+                        <paper-item>One Star</paper-item>
+                        <paper-item>Two Stars</paper-item>
+                        <paper-item>Three Stars</paper-item>
+                        <paper-item>Four Stars</paper-item>
+                        <paper-item>Five Stars</paper-item>
+                      </paper-listbox>
+                    </paper-dropdown-menu>
                 </div>
                 <div class="clearfix"></div>
                 <div class="btn-align">
@@ -83,7 +111,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 </div>
 
               </form>
- 
+
     </div>
     <div id="loading"><paper-spinner-lite id="spinnerlite" class="thick"></paper-spinner-lite> <em>please wait</em></div>
     <div id="results"></div>
@@ -117,6 +145,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           }
         },
         ready: function() {
+
           //sessionStorage.setItem("loaded", true);
           //if (sessionStorage.getItem("is_reloaded")){ 
           //alert('Reloaded!')
@@ -161,7 +190,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                
                   event.preventDefault();
                   //spinnerResto.active = true;
-                  setTimeout(function(){ document.getElementById('mapmarkers').style.display = "none";}, 3000);
+                  //setTimeout(function(){ document.getElementById('mapmarkers').style.display = "none";}, 3000);
                   spinnerRestoLite.active = true;
                   loading.style.display = "block";
                   setTimeout(function(){ 
@@ -215,7 +244,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 } else if (filtered[i].rest_rating === 'Five Stars'){
                   ratstar ='<star-ratings value="5" count="5"></star-ratings>';
                 } 
-                var restphoto = '<iron-image style="width:100%; height:150px;" background-color: lightgray;" preload fade sizing="cover" src="https://restoviewer.firebaseapp.com/images/'+filtered[i].rest_photo+'.jpg" alt="'+filtered[i].rest_name+'" id="'+filtered[i].rest_photo+'"></iron-image>';
+                var restphoto = '<img style="width:100%; height:150px;" background-color: lightgray;" preload fade sizing="cover" src="https://restoviewer.firebaseapp.com/images/'+filtered[i].rest_photo+'.jpg" alt="'+filtered[i].rest_name+'" id="'+filtered[i].rest_photo+'">';
 
                resto += '<div class="card">'+restphoto+'<div class="innertube"> <div class="rat-stars">'+ratstar+'</div><h4><a href="/restaurant/'+filtered[i].rest_id+'" tabindex="0">'+filtered[i].rest_name+'<span class="push-right">Reviews</span></h4></a><p><p>'+filtered[i].rest_reviews.substr(0, 50)+'...</p><b><iron-icon prefix icon="maps:place"></iron-icon>'+filtered[i].rest_address+'</b></div></div>';
                 
