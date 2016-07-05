@@ -23,36 +23,36 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         @apply(--paper-font-body2);
       }
     </style>
-  <google-maps-api api-key="AIzaSyBOJ0zpAeQQiksYE0i_VgWSMEgFM0aziKg" id="googlemaps" version="3.exp"></google-maps-api>
-    <div class="api-map" id="mapmarkers" tabindex="0">
+ <google-maps-api api-key="AIzaSyBOJ0zpAeQQiksYE0i_VgWSMEgFM0aziKg" id="googlemaps" version="3.exp"></google-maps-api>
+   <!-- <div class="api-map" id="mapmarkers">
    
-    </div>
+    </div>-->
    <div class="main">
     <div class="searchbox" tabindex="0">
      <h1 class="title-find"> Find A Restaurant To Review</h1>
      <form is="iron-form" id="restForm">
            <div class="pull-left"> 
            <div class="unfocused-line style-scope paper-input-container"></div>
-           <paper-input label=" Food Type" type="text" id="rest_type" required list="flist" autofocus value="Casual dining">
-                  <iron-icon prefix icon="maps:restaurant-menu"></iron-icon>
-                  <paper-icon-button suffix onclick="clearInput()" icon="clear" alt="clear" title="clear">
+           <paper-input label="Restaurant Type" type="text" id="rest_type" required list="flist" autofocus value="Mongolian barbecue" aria-labelledby="restaurant-type" tabindex="0">
+                  <iron-icon  id="ds" prefix icon="maps:restaurant-menu"></iron-icon>
+                  <paper-icon-button id="as" suffix onclick="clearInput()" icon="clear" alt="clear" title="clear">
                   </paper-icon-button>
                 </paper-input>
                  <datalist id="flist">
-                  <option value="Fast food">
-                  <option value="Family style">
-                  <option value="Mongolian barbecue">
-                  <option value="Buffet">
-                  <option value="Casual dining">
-                   <option value="Breakfast"> 
+                  <option value="Fast food" tabindex="-1">
+                  <option value="Family style" tabindex="-1">
+                  <option value="Mongolian barbecue" tabindex="-1">
+                  <option value="Buffet" tabindex="-1">
+                  <option value="Casual dining" tabindex="-1">
+                   <option value="Breakfast" tabindex="-1"> 
                  </datalist>
                  </div>
 
                 <div class="pull-right">
                 <div class="unfocused-line style-scope paper-input-container"></div>
-                   <paper-input label=" Price" type="text" id="rest_price" required list="plist" autofocus value="Middle Class">
-                  <iron-icon prefix icon="maps:local-atm"></iron-icon>
-                  <paper-icon-button suffix onclick="clearInput2()" icon="clear" alt="clear" title="clear">
+                   <paper-input label=" Restaurant Cost" type="text" id="rest_price" required list="plist" autofocus value="Middle Class" aria-labelledby="restaurant-cost">
+                  <iron-icon id="df" prefix icon="maps:local-atm"></iron-icon>
+                  <paper-icon-button id="sd" suffix onclick="clearInput2()" icon="clear" alt="clear" title="clear">
                   </paper-icon-button>
                 </paper-input>
                 <datalist id="plist">
@@ -60,12 +60,13 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                   <option value="Middle Class">
                   <option value="Luxury">
                  </datalist>
+
                 </div>
                  <div class="pull-right-x">
                  <div class="unfocused-line style-scope paper-input-container"></div>
-                   <paper-input label=" Rating" type="text" id="rest_rating" required list="rlist" autofocus value="Three Stars">
-                  <iron-icon prefix icon="star"></iron-icon>
-                  <paper-icon-button suffix onclick="clearInput3()" icon="clear" alt="clear" title="clear">
+                   <paper-input label="Restaurant Rating" type="text" id="rest_rating" required list="rlist" autofocus value="Three Stars" aria-labelledby="restaurant-rating">
+                  <iron-icon id="er" prefix icon="star" ></iron-icon>
+                  <paper-icon-button id="sw" suffix onclick="clearInput3()" icon="clear" alt="clear" title="clear">
                   </paper-icon-button>
                 </paper-input>
                   <datalist id="rlist">
@@ -82,6 +83,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 </div>
 
               </form>
+ 
     </div>
     <div id="loading"><paper-spinner-lite id="spinnerlite" class="thick"></paper-spinner-lite> <em>please wait</em></div>
     <div id="results"></div>
@@ -144,12 +146,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
              
                   spinnerRestoLite.active = true;
                   loading.style.display = "block";
-                  document.getElementById('mapmarkers').style.display = "none";
+                  //document.getElementById('mapmarkers').style.display = "none";
                   setTimeout(function(){ 
                     if(runsearch(reviewer)){
                       spinnerRestoLite.active = false;
                       loading.style.display = "none";
-                      document.getElementById('mapmarkers').style.display = "block";
+                     // document.getElementById('mapmarkers').style.display = "block";
                     } 
                    }, 3000);
 
@@ -203,21 +205,21 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                var markers = '';
           for (i = 0; i < filtered.length; i++) {
                if(filtered[i].rest_rating === 'One Star'){
-                  ratstar ='<paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button><paper-icon-button icon="icons:star-border" class="fill_star"></paper-icon-button><paper-icon-button icon="icons:star-border" class="fill_star"></paper-icon-button><paper-icon-button icon="icons:star-border" class="fill_star"></paper-icon-button><paper-icon-button icon="icons:star-border" class="fill_star"></paper-icon-button>';
+                  ratstar ='<star-ratings value="1" count="5"></star-ratings>';
                 } else if (filtered[i].rest_rating === 'Two Stars'){
-                  ratstar ='<paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button><paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button><paper-icon-button icon="icons:star-border" class="fill_star"></paper-icon-button><paper-icon-button icon="icons:star-border" class="fill_star"></paper-icon-button><paper-icon-button icon="icons:star-border" class="fill_star"></paper-icon-button>';
+                  ratstar ='<star-ratings value="2" count="5"></star-ratings>';
                 } else if (filtered[i].rest_rating === 'Three Stars'){
-                  ratstar ='<paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button><paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button><paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button><paper-icon-button icon="icons:star-border" class="fill_star"></paper-icon-button><paper-icon-button icon="icons:star-border" class="fill_star"></paper-icon-button>';
+                  ratstar ='<star-ratings value="3" count="5"></star-ratings>';
                 } else if (filtered[i].rest_rating === 'Four Stars'){
-                  ratstar ='<paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button><paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button><paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button><paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button><paper-icon-button icon="icons:star-border" class="fill_star"></paper-icon-button>';
+                  ratstar ='<star-ratings value="4" count="5"></star-ratings>';
                 } else if (filtered[i].rest_rating === 'Five Stars'){
-                  ratstar ='<paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button><paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button><paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button><paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button><paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button>';
+                  ratstar ='<star-ratings value="5" count="5"></star-ratings>';
                 } 
                 var restphoto = '<iron-image style="width:100%; height:150px;" background-color: lightgray;" preload fade sizing="cover" src="https://restoviewer.firebaseapp.com/images/'+filtered[i].rest_photo+'.jpg" alt="'+filtered[i].rest_name+'" id="'+filtered[i].rest_photo+'"></iron-image>';
 
-               resto += '<div class="card" tabindex="0">'+restphoto+'<div class="innertube"> <div class="rat-stars">'+ratstar+'</div><h4><a href="/restaurant/'+filtered[i].rest_id+'" tabindex="0">'+filtered[i].rest_name+'<span class="push-right">Reviews</span></h4></a><p><p>'+filtered[i].rest_reviews.substr(0, 50)+'...</p><b><iron-icon prefix icon="maps:place"></iron-icon>'+filtered[i].rest_address+'</b></div></div>';
+               resto += '<div class="card">'+restphoto+'<div class="innertube"> <div class="rat-stars">'+ratstar+'</div><h4><a href="/restaurant/'+filtered[i].rest_id+'" tabindex="0">'+filtered[i].rest_name+'<span class="push-right">Reviews</span></h4></a><p><p>'+filtered[i].rest_reviews.substr(0, 50)+'...</p><b><iron-icon prefix icon="maps:place"></iron-icon>'+filtered[i].rest_address+'</b></div></div>';
                 
-                   markers += '<google-map-marker latitude="'+filtered[i].rest_lat+'" longitude="'+filtered[i].rest_long+'" draggable="true" title="Go Giants!"  info  animation="BOUNCE" ></google-map-marker>';
+                  // markers += '<google-map-marker latitude="'+filtered[i].rest_lat+'" longitude="'+filtered[i].rest_long+'" draggable="true" title="Go Giants!"  info  animation="BOUNCE" ></google-map-marker>';
                  
               
           }
@@ -228,7 +230,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
               resto = '<paper-material elevation="1" class="no-resto">Something weird happened. Try again later!</paper-material>'
            }
           
-             mapmarker.innerHTML = '<google-map  fit-to-markers open="true" >' + markers + '</google-map>';
+             //mapmarker.innerHTML = '<google-map  fit-to-markers open="true" >' + markers + '</google-map>';
            results.innerHTML = resto;
            return true;
         }

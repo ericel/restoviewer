@@ -212,3 +212,28 @@ h4 span{
 .margin20{
   margin-bottom: 20px;
 }
+.skip_nav {
+  position: absolute;
+  top: -40px;
+  left: 0;
+  background: #BF1722;
+  color: white;
+  padding: 8px;
+  z-index: 100;
+}
+.skip_nav:focus {
+  top: 0;
+}
+.custom-wrapper{
+        background: #333;
+        margin: 0px;
+}
+.custom-class .star-rating-wrapper > span{
+        padding: 1px;
+        padding-top: 5px;
+        padding-bottom: 5px;
+        font-size:1em;
+}
+.gold .star-rating-wrapper > iron-icon{
+        color : gold;
+}

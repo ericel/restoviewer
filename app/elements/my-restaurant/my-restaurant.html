@@ -156,15 +156,15 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
               if (typeof(Storage) !== "undefined") {
                   if(localStorage.getItem("restID") === routeparams){
                     if(localStorage.stars === 'One Star'){
-                  ratstar ='<paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button><paper-icon-button icon="icons:star-border" class="fill_star"></paper-icon-button><paper-icon-button icon="icons:star-border" class="fill_star"></paper-icon-button><paper-icon-button icon="icons:star-border" class="fill_star"></paper-icon-button><paper-icon-button icon="icons:star-border" class="fill_star"></paper-icon-button>';
+                  ratstar ='<div class="custom-wrapper gold"><star-rating showtotals="true" stars="5" rate="1" class="custom-class"></star-rating></div>';
                 } else if (localStorage.stars === 'Two Stars'){
-                  ratstar ='<paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button><paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button><paper-icon-button icon="icons:star-border" class="fill_star"></paper-icon-button><paper-icon-button icon="icons:star-border" class="fill_star"></paper-icon-button><paper-icon-button icon="icons:star-border" class="fill_star"></paper-icon-button>';
+                  ratstar ='<div class="custom-wrapper gold"><star-rating showtotals="true" stars="5" rate="2" class="custom-class"></star-rating></div>';
                 } else if (localStorage.stars === 'Three Stars'){
-                  ratstar ='<paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button><paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button><paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button><paper-icon-button icon="icons:star-border" class="fill_star"></paper-icon-button><paper-icon-button icon="icons:star-border" class="fill_star"></paper-icon-button>';
+                  ratstar ='<div class="custom-wrapper gold"><star-rating showtotals="true" stars="5" rate="3" class="custom-class"></star-rating></div>';
                 } else if (localStorage.stars === 'Four Stars'){
-                  ratstar ='<paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button><paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button><paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button><paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button><paper-icon-button icon="icons:star-border" class="fill_star"></paper-icon-button>';
+                  ratstar ='<div class="custom-wrapper gold"><star-rating showtotals="true" stars="5" rate="4" class="custom-class"></star-rating></div>';
                 } else if (localStorage.stars === 'Five Stars'){
-                  ratstar ='<paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button><paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button><paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button><paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button><paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button>';
+                  ratstar ='<div class="custom-wrapper gold"><star-rating showtotals="true" stars="5" rate="5" class="custom-class"></star-rating></div>';
                 } 
                     
                        localST = '<paper-material elevation="1" tabindex="0"><iron-icon prefix icon="social:person"></iron-icon> <b>'+localStorage.names+'</b> Date: '+localStorage.datest+'<div class=" small-icon"> <iron-icon prefix icon="star"></iron-icon> <b> Rating : </b>'+ratstar+'</div><p><iron-icon prefix icon="communication:textsms"></iron-icon> <b> Review : </b> '+localStorage.comments+' </p></paper-material>';
@@ -182,15 +182,15 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
              }
              var ratstar = '';
              if(filtered[0].rest_rating === 'One Star'){
-                  ratstar ='<paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button><paper-icon-button icon="icons:star-border" class="fill_star"></paper-icon-button><paper-icon-button icon="icons:star-border" class="fill_star"></paper-icon-button><paper-icon-button icon="icons:star-border" class="fill_star"></paper-icon-button><paper-icon-button icon="icons:star-border" class="fill_star"></paper-icon-button>';
+                  ratstar ='<star-ratings value="1" count="5"></star-ratings>';
                 } else if (filtered[0].rest_rating === 'Two Stars'){
-                  ratstar ='<paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button><paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button><paper-icon-button icon="icons:star-border" class="fill_star"></paper-icon-button><paper-icon-button icon="icons:star-border" class="fill_star"></paper-icon-button><paper-icon-button icon="icons:star-border" class="fill_star"></paper-icon-button>';
+                  ratstar ='<star-ratings value="2" count="5"></star-ratings>';
                 } else if (filtered[0].rest_rating === 'Three Stars'){
-                  ratstar ='<paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button><paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button><paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button><paper-icon-button icon="icons:star-border" class="fill_star"></paper-icon-button><paper-icon-button icon="icons:star-border" class="fill_star"></paper-icon-button>';
+                  ratstar ='<star-ratings value="3" count="5"></star-ratings>';
                 } else if (filtered[0].rest_rating === 'Four Stars'){
-                  ratstar ='<paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button><paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button><paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button><paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button><paper-icon-button icon="icons:star-border" class="fill_star"></paper-icon-button>';
+                  ratstar ='<star-ratings value="4" count="5"></star-ratings>';
                 } else if (filtered[0].rest_rating === 'Five Stars'){
-                  ratstar ='<paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button><paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button><paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button><paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button><paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button>';
+                  ratstar ='<star-ratings value="5" count="5"></star-ratings>';
                 } 
               var restphoto = '<iron-image style="width:100%; height:150px;" background-color: lightgray;" preload fade sizing="cover" src="https://restoviewer.firebaseapp.com/images/'+filtered[0].rest_photo+'.jpg" alt="'+filtered[0].rest_name+'" id="'+filtered[0].rest_photo+'"></iron-image>';
               document.querySelector('#ratingstars').innerHTML = ratstar;
@@ -201,7 +201,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
              var reviews = '<paper-material elevation="1" tabindex="0"><iron-icon prefix icon="social:person"></iron-icon> <b>'+filtered[0].rest_reviewer+'</b> Date: '+filtered[0].rest_review_date+'<div class=" small-icon"> <iron-icon prefix icon="star"></iron-icon> <b> Rating : </b>'+ratstar+'</div><p><iron-icon prefix icon="communication:textsms"></iron-icon> <b> Review : </b> '+filtered[0].rest_reviews+' </p></paper-material>';
               document.querySelector('#reviews').innerHTML = document.querySelector('#reviews').innerHTML + reviews;
-              var dirtMock = '<div><paper-material elevation="1" tabindex="0"><iron-icon prefix icon="social:person"></iron-icon> <b>Jeremy</b> Date: 07/01/2016<div class=" small-icon"><iron-icon prefix icon="star"></iron-icon> <b> Rating : </b> <paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button><paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button><paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button><paper-icon-button icon="icons:star-border" class="fill_star"></paper-icon-button><paper-icon-button icon="icons:star-border" class="fill_star"></paper-icon-button></div> <p><iron-icon prefix icon="communication:textsms"></iron-icon> <b> Review : </b> nusquam nominavi periculis, sit elit oportere ea.Cu mei vide viris gloriatur, at populo eripuit sit.</p></paper-material></div><paper-material elevation="1" tabindex="0"><iron-icon prefix icon="social:person"></iron-icon> <b>Mark</b> Date: 15/01/2016<div class=" small-icon"> <iron-icon prefix icon="star"></iron-icon> <b> Rating : </b> <paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button><paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button> <paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button><paper-icon-button icon="icons:star-border" class="fill_star"></paper-icon-button><paper-icon-button icon="icons:star-border" class="fill_star"></paper-icon-button></div><p><iron-icon prefix icon="communication:textsms"></iron-icon> <b> Review : </b> nusquam nominavi periculis, sit elit oportere ea.Cu mei vide viris gloriatur, at populo eripuit sit. </p></paper-material><paper-material elevation="1" tabindex="0"><iron-icon prefix icon="social:person"></iron-icon> <b>Eric Oj</b> Date: 30/01/2016<div class=" small-icon"><iron-icon prefix icon="star"></iron-icon> <b> Rating : </b> <paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button><paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button><paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button><paper-icon-button icon="star" class="fill_star"></paper-icon-button><paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button></div><p><iron-icon prefix icon="communication:textsms"></iron-icon><b> Review : </b> nusquam nominavi periculis, sit elit oportere ea.Cu mei vide viris gloriatur, at populo eripuit sit. </p></paper-material></div></div></div>'
+              var dirtMock = '<div><paper-material elevation="1" tabindex="0"><iron-icon prefix icon="social:person"></iron-icon> <b>Jeremy</b> Date: 07/01/2016<div class=" small-icon"><iron-icon prefix icon="star"></iron-icon> <b> Rating : </b> <star-ratings value="3" count="5"></star-ratings></div></div> <p><iron-icon prefix icon="communication:textsms"></iron-icon> <b> Review : </b> nusquam nominavi periculis, sit elit oportere ea.Cu mei vide viris gloriatur, at populo eripuit sit.</p></paper-material></div><paper-material elevation="1" tabindex="0"><iron-icon prefix icon="social:person"></iron-icon> <b>Mark</b> Date: 15/01/2016<div class=" small-icon"> <iron-icon prefix icon="star"></iron-icon> <b> Rating : </b> <star-ratings value="4" count="5"></star-ratings></div><p><iron-icon prefix icon="communication:textsms"></iron-icon> <b> Review : </b> nusquam nominavi periculis, sit elit oportere ea.Cu mei vide viris gloriatur, at populo eripuit sit. </p></paper-material><paper-material elevation="1" tabindex="0"><iron-icon prefix icon="social:person"></iron-icon> <b>Eric Oj</b> Date: 30/01/2016<div class=" small-icon"><iron-icon prefix icon="star"></iron-icon> <b> Rating : </b><star-ratings value="3" count="5"></star-ratings></div><p><iron-icon prefix icon="communication:textsms"></iron-icon><b> Review : </b> nusquam nominavi periculis, sit elit oportere ea.Cu mei vide viris gloriatur, at populo eripuit sit. </p></paper-material></div></div></div>'
               document.querySelector('#reviews').innerHTML = document.querySelector('#reviews').innerHTML + dirtMock;
           
            } // end function
@@ -216,32 +216,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
              star1.innerHTML = '<paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button>';
              starwars.value = "One Star";
           });
-           star2.addEventListener('click', function(){
-             star1.innerHTML = '<paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button>';
-             star2.innerHTML = '<paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button>';
-             starwars.value = 'Two Stars';
-          });
-           star3.addEventListener('click', function(){
-             star1.innerHTML = '<paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button>';
-             star2.innerHTML = '<paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button>';
-             star3.innerHTML = '<paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button>';
-             starwars.value = 'Three Stars';
-          });
-           star4.addEventListener('click', function(){
-             star1.innerHTML = '<paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button>';
-             star2.innerHTML = '<paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button>';
-             star3.innerHTML = '<paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button>';
-             star4.innerHTML = '<paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button>';
-             starwars.value = 'Four Stars';
-          });
-            star5.addEventListener('click', function(){
-             star1.innerHTML = '<paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button>';
-             star2.innerHTML = '<paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button>';
-             star3.innerHTML = '<paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button>';
-             star4.innerHTML = '<paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button>';
-             star5.innerHTML = '<paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button>';
-             starwars.value = 'Five Stars';
-          });
+          
             
           }
       });
@@ -272,15 +247,15 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         starwarsVal = starwars.value;
   
     if(starwarsVal === 'One Star'){
-                  ratstar ='<paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button><paper-icon-button icon="icons:star-border" class="fill_star"></paper-icon-button><paper-icon-button icon="icons:star-border" class="fill_star"></paper-icon-button><paper-icon-button icon="icons:star-border" class="fill_star"></paper-icon-button><paper-icon-button icon="icons:star-border" class="fill_star"></paper-icon-button>';
+                  ratstar ='<div class="custom-wrapper gold"><star-rating showtotals="true" stars="5" rate="1" class="custom-class"></star-rating></div>';
                 } else if (starwarsVal === 'Two Stars'){
-                  ratstar ='<paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button><paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button><paper-icon-button icon="icons:star-border" class="fill_star"></paper-icon-button><paper-icon-button icon="icons:star-border" class="fill_star"></paper-icon-button><paper-icon-button icon="icons:star-border" class="fill_star"></paper-icon-button>';
+                  ratstar ='<div class="custom-wrapper gold"><star-rating showtotals="true" stars="5" rate="2" class="custom-class"></star-rating></div>';
                 } else if (starwarsVal === 'Three Stars'){
-                  ratstar ='<paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button><paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button><paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button><paper-icon-button icon="icons:star-border" class="fill_star"></paper-icon-button><paper-icon-button icon="icons:star-border" class="fill_star"></paper-icon-button>';
+                  ratstar ='<div class="custom-wrapper gold"><star-rating showtotals="true" stars="5" rate="3" class="custom-class"></star-rating></div>';
                 } else if (starwarsVal === 'Four Stars'){
-                  ratstar ='<paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button><paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button><paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button><paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button><paper-icon-button icon="icons:star-border" class="fill_star"></paper-icon-button>';
+                  ratstar ='<div class="custom-wrapper gold"><star-rating showtotals="true" stars="5" rate="4" class="custom-class"></star-rating></div>';
                 } else if (starwarsVal === 'Five Stars'){
-                  ratstar ='<paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button><paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button><paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button><paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button><paper-icon-button icon="icons:star" class="fill_star"></paper-icon-button>';
+                  ratstar ='<div class="custom-wrapper gold"><star-rating showtotals="true" stars="5" rate="5" class="custom-class"></star-rating></div>';
                 } 
       routeparams = document.querySelector('#routeparams').value;
     if (typeof(Storage) !== "undefined") {
