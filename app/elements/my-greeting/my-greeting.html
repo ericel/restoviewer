@@ -22,6 +22,14 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       input {
         @apply(--paper-font-body2);
       }
+    .select{
+      margin-top: 15px;
+      margin-bottom: 15px;
+    }
+    select:focus  {
+      border-color: var(--primary-color);
+      background: #C5C5C5;
+    }
     </style>
  <google-maps-api api-key="AIzaSyBOJ0zpAeQQiksYE0i_VgWSMEgFM0aziKg" id="googlemaps" version="3.exp"></google-maps-api>
    <!-- <div class="api-map" id="mapmarkers">
@@ -30,80 +38,38 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
    <div class="main">
     <div class="searchbox" tabindex="0">
      <h1 class="title-find"> Find A Restaurant To Review</h1>
+
      <form is="iron-form" id="restForm">
-           <div class="pull-left"> 
-           <div class="unfocused-line style-scope paper-input-container"></div>
-           <!--<paper-input label="Restaurant Type" type="text" id="rest_type" required list="flist" autofocus value="Mongolian barbecue"  tabindex="0">
-                  <iron-icon  id="ds" prefix icon="maps:restaurant-menu"></iron-icon>
-                  <paper-icon-button id="as" suffix onclick="clearInput()" icon="clear" alt="clear" title="clear">
-                  </paper-icon-button>
-                </paper-input>
-                 <datalist id="flist">
-                  <option value="Fast food" tabindex="-1">
-                  <option value="Family style" tabindex="-1">
-                  <option value="Mongolian barbecue" tabindex="-1">
-                  <option value="Buffet" tabindex="-1">
-                  <option value="Casual dining" tabindex="-1">
-                   <option value="Breakfast" tabindex="-1"> 
-                 </datalist>-->
-                    <paper-dropdown-menu label="Restaurant Type" id="rest_type" required value="Mongolian barbecue">
-                      <paper-listbox class="dropdown-content">
-                        <paper-item>Fast food</paper-item>
-                        <paper-item>Family style</paper-item>
-                        <paper-item>Mongolian barbecue</paper-item>
-                        <paper-item>Buffet</paper-item>
-                        <paper-item>Casual dining</paper-item>
-                        <paper-item>Breakfast</paper-item>
-                      </paper-listbox>
-                    </paper-dropdown-menu>
-                    <!--<select id="rest_type">
-                    </select>-->
+           <div class="pull-left select" > 
+         
+                    <select id="rest_type" autofocus>
+                        <option value="Mongolian barbecue" >Mongolian barbecue</option>
+                        <option value="Fast food">Fast food</option>
+                        <option value="Family style">Family style</option>
+                        <option value="Buffet">Buffet</option>
+                        <option value="Casual dining">Casual dining</option>
+                        <option value="Breakfast">Breakfast</option>
+                    </select>
 
                  </div>
 
-                <div class="pull-right">
-                <div class="unfocused-line style-scope paper-input-container" ></div>
-                  <!-- <paper-input label=" Restaurant Cost" type="text" id="rest_price" required list="plist" autofocus value="Middle Class">
-                  <iron-icon id="df" prefix icon="maps:local-atm"></iron-icon>
-                  <paper-icon-button id="sd" suffix onclick="clearInput2()" icon="clear" alt="clear" title="clear">
-                  </paper-icon-button>
-                </paper-input>
-                <datalist id="plist">
-                  <option value="Low Price">
-                  <option value="Middle Class">
-                  <option value="Luxury">
-                 </datalist>-->
-                  <paper-dropdown-menu label="Restaurant Cost" id="rest_price" required value="Middle Class">
-                      <paper-listbox class="dropdown-content">
-                        <paper-item>Low Price</paper-item>
-                        <paper-item>Middle Class</paper-item>
-                        <paper-item>Luxury</paper-item>
-                      </paper-listbox>
-                    </paper-dropdown-menu>
+                <div class="pull-right select">
+               
+                    <select id="rest_price">
+                        <option value="Middle Class">Middle Class</option>
+                        <option value="Low Price">Low Price</option>option
+                        <option value="Luxury">Luxury</option>
+                    </select>
                 </div>
-                 <div class="pull-right-x">
-                 <div class="unfocused-line style-scope paper-input-container"></div>
-                  <!-- <paper-input label="Restaurant Rating" type="text" id="rest_rating" required list="rlist" autofocus value="Three Stars">
-                  <iron-icon id="er" prefix icon="star" ></iron-icon>
-                  <paper-icon-button id="sw" suffix onclick="clearInput3()" icon="clear" alt="clear" title="clear">
-                  </paper-icon-button>
-                </paper-input>
-                  <datalist id="rlist">
-                  <option value="one star">
-                  <option value="Two Stars">
-                  <option value="Three Stars">
-                  <option value="Four Stars">
-                  <option value="Five Stars">
-                 </datalist>-->
-                 <paper-dropdown-menu label="Restaurant Rating" id="rest_rating" required value="Three Stars">
-                      <paper-listbox class="dropdown-content">
-                        <paper-item>One Star</paper-item>
-                        <paper-item>Two Stars</paper-item>
-                        <paper-item>Three Stars</paper-item>
-                        <paper-item>Four Stars</paper-item>
-                        <paper-item>Five Stars</paper-item>
-                      </paper-listbox>
-                    </paper-dropdown-menu>
+                 <div class="pull-right-x select">
+                
+                    <select id="rest_rating">
+                        <option value="Three Stars">Three Stars</option>
+                        <option value="One Star">One Star</option>
+                        <option value="Two Stars">Two Stars</option>
+                        <option value="Four Stars">Four Stars</option>
+                        <option value="Five Stars">Five Stars</option>
+                    </select>
                 </div>
                 <div class="clearfix"></div>
                 <div class="btn-align">
@@ -111,7 +77,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 </div>
 
               </form>
-
+              <!--<paper-button on-click="openToast">Open Toast</paper-button>-->
     </div>
     <div id="loading"><paper-spinner-lite id="spinnerlite" class="thick"></paper-spinner-lite> <em>please wait</em></div>
     <div id="results"></div>
@@ -234,15 +200,15 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                var markers = '';
           for (i = 0; i < filtered.length; i++) {
                if(filtered[i].rest_rating === 'One Star'){
-                  ratstar ='<star-ratings value="1" count="5"></star-ratings>';
+                  ratstar ='<img src="images/one.png" alt="One Star restaurant">';
                 } else if (filtered[i].rest_rating === 'Two Stars'){
-                  ratstar ='<star-ratings value="2" count="5"></star-ratings>';
+                  ratstar ='<img src="images/two.png" alt="Two Stars restaurant">';
                 } else if (filtered[i].rest_rating === 'Three Stars'){
-                  ratstar ='<star-ratings value="3" count="5"></star-ratings>';
+                  ratstar ='<img src="images/three.png" alt="Three Stars restaurant">';
                 } else if (filtered[i].rest_rating === 'Four Stars'){
-                  ratstar ='<star-ratings value="4" count="5"></star-ratings>';
+                  ratstar ='<img src="images/four.png" alt="Four Stars restaurant">';
                 } else if (filtered[i].rest_rating === 'Five Stars'){
-                  ratstar ='<star-ratings value="5" count="5"></star-ratings>';
+                  ratstar ='<img src="images/five.png" alt="Five Stars restaurant">';
                 } 
                 var restphoto = '<img style="width:100%; height:150px;" background-color: lightgray;" preload fade sizing="cover" src="https://restoviewer.firebaseapp.com/images/'+filtered[i].rest_photo+'.jpg" alt="'+filtered[i].rest_name+'" id="'+filtered[i].rest_photo+'">';
 
@@ -267,7 +233,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         //document.querySelector('img').id = '';
 
         });
-        }
+        },
+        //openToast: function() {
+      //app.$.toast.text = 'Event Created Successfully!';
+       //       app.$.toast.show();
+    //}
   
       });
     })();
