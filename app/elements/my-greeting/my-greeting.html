@@ -40,9 +40,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
      <h1 class="title-find"> Find A Restaurant To Review</h1>
 
      <form is="iron-form" id="restForm">
-           <div class="pull-left select" > 
-         
-                    <select id="rest_type" autofocus>
+           <div class="pull-left" > 
+                  <label for="rest_type">Restaurant Type</label>
+                    <select name="rest_type" id="rest_type" autofocus class="select">
                         <option value="Mongolian barbecue" >Mongolian barbecue</option>
                         <option value="Fast food">Fast food</option>
                         <option value="Family style">Family style</option>
@@ -52,18 +52,18 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                     </select>
 
                  </div>
-
-                <div class="pull-right select">
                
-                    <select id="rest_price">
+                <div class="pull-right" >
+                <label for="rest_price">Restaurant Cost</label>
+                    <select name="rest_price" id="rest_price" class="select">
                         <option value="Middle Class">Middle Class</option>
                         <option value="Low Price">Low Price</option>option
                         <option value="Luxury">Luxury</option>
                     </select>
                 </div>
-                 <div class="pull-right-x select">
-                
-                    <select id="rest_rating">
+                 <div class="pull-right-x ">
+                 <label for="rest_rating">Restaurant Rating</label>
+                    <select name="rest_rating" id="rest_rating"  class="select">
                         <option value="Three Stars">Three Stars</option>
                         <option value="One Star">One Star</option>
                         <option value="Two Stars">Two Stars</option>
@@ -212,7 +212,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 } 
                 var restphoto = '<img style="width:100%; height:150px;" background-color: lightgray;" preload fade sizing="cover" src="https://restoviewer.firebaseapp.com/images/'+filtered[i].rest_photo+'.jpg" alt="'+filtered[i].rest_name+'" id="'+filtered[i].rest_photo+'">';
 
-               resto += '<div class="card">'+restphoto+'<div class="innertube"> <div class="rat-stars">'+ratstar+'</div><h4><a href="/restaurant/'+filtered[i].rest_id+'" tabindex="0">'+filtered[i].rest_name+'<span class="push-right">Reviews</span></h4></a><p><p>'+filtered[i].rest_reviews.substr(0, 50)+'...</p><b><iron-icon prefix icon="maps:place"></iron-icon>'+filtered[i].rest_address+'</b></div></div>';
+               resto += '<div class="card">'+restphoto+'<div class="innertube"> <div class="rat-stars">'+ratstar+'</div><h2><a href="/restaurant/'+filtered[i].rest_id+'" tabindex="0">'+filtered[i].rest_name+'</h2></a><p>'+filtered[i].rest_reviews.substr(0, 50)+'...</p><b><iron-icon prefix icon="maps:place"></iron-icon>'+filtered[i].rest_address+'</b></div></div>';
                 
                   // markers += '<google-map-marker latitude="'+filtered[i].rest_lat+'" longitude="'+filtered[i].rest_long+'" draggable="true" title="Go Giants!"  info  animation="BOUNCE" ></google-map-marker>';
                  

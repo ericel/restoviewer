@@ -11,7 +11,9 @@
     "google-map": "GoogleWebComponents/google-map#^1.1.10",
     "geo-location": "ebidel/geo-location#^1.0.5",
     "paper-dropdown-menu": "PolymerElements/paper-dropdown-menu#^1.2.2",
-    "iron-a11y-keys": "PolymerElements/iron-a11y-keys#^1.0.5"
+    "iron-a11y-keys": "PolymerElements/iron-a11y-keys#^1.0.5",
+    "paper-input": "PolymerElements/paper-input#^1.1.14",
+    "paper-scroll-header-panel": "PolymerElements/paper-scroll-header-panel#^1.0.15"
   },
   "devDependencies": {
     "web-component-tester": "^4.0.0"

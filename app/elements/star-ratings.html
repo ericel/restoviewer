@@ -65,9 +65,9 @@ Fired when the count of selected stars changes.
   </style>
   <template>
     <iron-a11y-keys  keys="* end home right up left down esc" on-keys-pressed="handleKeys"></iron-a11y-keys>
-    <span id="container" tabindex="0" role="slider" aria-valuemax="{{count}}" aria-valuemin="0" aria-valuenow="{{value}}">
+    <span id="container" tabindex="0" role="slider" aria-valuemax="5" aria-valuemin="0"  aria-valuenow=" " >
       <template is="dom-repeat" items="{{stars}}" as="star">
-        <iron-icon class="star" icon="{{starIcon(star, value)}}"  on-tap="updateValue"></iron-icon>
+        <iron-icon  class="star" icon="{{starIcon(star, value)}}"  on-tap="updateValue"></iron-icon>
       </template>
     </span>
   </template>
@@ -118,7 +118,7 @@ Fired when the count of selected stars changes.
          */
         value: {
           type: Number,
-          value: 0,
+          value: 1,
           notify: true,
           observer: 'valueChanged'
         }
