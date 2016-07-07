@@ -73,7 +73,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
          <div class="btn-align">
          <div id="status"></div>
           <div class="margin20"></div>
-               <paper-button raised class="custom green" id="idRest" onclick="_reviewSubmit(event)" disabled>Post Review</paper-button>
+               <paper-button raised class="custom green" id="idRest" onclick="_reviewSubmit(event)">Post Review</paper-button>
                 </div>
       </form>
       </div>
@@ -81,7 +81,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
      <div class="clearfix"></div>
      <div class="reviews">
-        <h1> Customer Reviews: </h1>
+        <h2> Customer Reviews: </h2>
         <div class="unfocused-line style-scope paper-input-container"></div>
 
          <div id="reviewsadded"></div>
@@ -107,10 +107,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
            var reviewForm = this.$.reviewForm;
            var idRest = this.$.idRest;
         
-              reviewForm.addEventListener('mouseout', function(event) {
+              /*reviewForm.addEventListener('mouseout', function(event) {
               //idRest.disabled = !reviewForm.validate();
           
-            });
+            });*/
           
 
         },
@@ -238,6 +238,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                   ratstar ='<img src="images/five.png" alt="Five Stars restaurant">';
                 } 
       routeparams = document.querySelector('#routeparams').value;
+      console.log(routeparams);
     if (typeof(Storage) !== "undefined") {
       if(localStorage.getItem("restID") !== routeparams){
           localStorage.restID = routeparams;
