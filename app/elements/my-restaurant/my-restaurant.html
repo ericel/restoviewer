@@ -108,7 +108,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
            var idRest = this.$.idRest;
         
               reviewForm.addEventListener('mouseout', function(event) {
-              idRest.disabled = !reviewForm.validate();
+              //idRest.disabled = !reviewForm.validate();
           
             });
           
@@ -183,7 +183,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 } else if (filtered[0].rest_rating === 'Five Stars'){
                   ratstar ='<img src="images/five.png" alt="Five Stars restaurant">';
                 }
-              var restphoto = '<img tabindex="0" class="resto-img" id="'+filtered[0].rest_name+'" src="https://restoviewer.firebaseapp.com/images/'+filtered[0].rest_photo+'.jpg" alt="'+filtered[0].rest_name+'">';
+              var restphoto = '<img tabindex="0" class="resto-img" id="'+filtered[0].rest_name+' restaurant" src="https://restoviewer.firebaseapp.com/images/'+filtered[0].rest_photo+'.jpg" alt="'+filtered[0].rest_name+'">';
               document.querySelector('#ratingstars').innerHTML = '<span class="rat-stars-x" tabindex="0" aria-label="'+filtered[0].rest_rating+'">'+ratstar+'<span>';
               document.querySelector('#address').innerHTML = '<span tabindex="0" aria-label="'+filtered[0].rest_address+'">'+filtered[0].rest_address+'</span>';
               document.querySelector('#restname').innerHTML = '<span tabindex="0" aria-label="'+filtered[0].rest_name+' restaurant" >'+filtered[0].rest_name+'\'s Restaurant</span>';
