@@ -29,31 +29,32 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       }
       
     </style>
+    <main class="main">
      <div class="layout vertical">
     
       <div class="l-grid">
        <div id="restimg"></div>
       <div class="innertube">
       
-      <h4> <span id="restname"></span>'s Restaurant</h4>
+      <h1 id="restname"></h1>
       <p>
       <span  id="ratingstars"></span>
       </p>
       <p><iron-icon prefix icon="maps:place"></iron-icon> <span id="address"></span></p>
-      <p><iron-icon prefix icon="date-range"></iron-icon> Mons - Sats: 9AM ~ 10pm</p>
+      <p><iron-icon prefix icon="date-range"></iron-icon> <span tabindex="0" aria-label="Mondays - Saturdays: 9AM to 10pm">Mons - Sats: 9AM ~ 10pm</span></p>
        
       </div>
     </div>
-    <div class="l-grid-1">
+    <div class="l-grid-1" tabindex="0" aria-label="Restaurant Review Form">
       <h1  class="page-title">Restaurant Review</h1>
        <div class="unfocused-line style-scope paper-input-container"></div>
        <form is="iron-form" id="reviewForm">
        
-       <paper-input name="fullname" id="fullname" label="Full Name" autofocus auto-validate pattern="^[a-zA-Z\s]*$" error-message="Only letters accepted" required></paper-input>
+       <paper-input name="fullname" id="fullname" label="Full Name" auto-validate pattern="^[a-zA-Z\s]*$" error-message="Only letters accepted" required></paper-input>
       
        <div class="rstar">
       <b>Rate by Stars</b>
-      <label for="starcall">Click To Rate: <span class="required">*</span></label>
+      <label for="starcall">Click To Rate: <span class="required" aria-label="required">*</span></label>
        <div class="unfocused-line style-scope paper-input-container"></div>
 
        <div class="rat-stars big-icon">
@@ -67,7 +68,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       
       <div class="unfocused-line style-scope paper-input-container"></div>
          <!--<paper-textarea label="Add a comment" id="comment" auto-validate error-message="Review comment needed" value="" required ></paper-textarea>-->
-         <label for="comment">Add a comment: <span class="required">*</span></label>
+         <label for="comment">Add a comment: <span class="required" aria-label="required">*</span></label>
         <textarea name="comment" id="comment" required></textarea>
          <div class="btn-align">
          <div id="status"></div>
@@ -86,7 +87,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
          <div id="reviewsadded"></div>
          <div id="reviews"></div>
 
-
+</main>
   </template>
 
   <script>
@@ -182,10 +183,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 } else if (filtered[0].rest_rating === 'Five Stars'){
                   ratstar ='<img src="images/five.png" alt="Five Stars restaurant">';
                 }
-              var restphoto = '<img class="resto-img" id="'+filtered[0].rest_name+'" src="https://restoviewer.firebaseapp.com/images/'+filtered[0].rest_photo+'.jpg" alt="'+filtered[0].rest_name+'">';
-              document.querySelector('#ratingstars').innerHTML = '<span class="rat-stars-x">'+ratstar+'<span>';
-              document.querySelector('#address').innerHTML = filtered[0].rest_address;
-              document.querySelector('#restname').innerHTML = filtered[0].rest_name;
+              var restphoto = '<img tabindex="0" class="resto-img" id="'+filtered[0].rest_name+'" src="https://restoviewer.firebaseapp.com/images/'+filtered[0].rest_photo+'.jpg" alt="'+filtered[0].rest_name+'">';
+              document.querySelector('#ratingstars').innerHTML = '<span class="rat-stars-x" tabindex="0" aria-label="'+filtered[0].rest_rating+'">'+ratstar+'<span>';
+              document.querySelector('#address').innerHTML = '<span tabindex="0" aria-label="'+filtered[0].rest_address+'">'+filtered[0].rest_address+'</span>';
+              document.querySelector('#restname').innerHTML = '<span tabindex="0" aria-label="'+filtered[0].rest_name+' restaurant" >'+filtered[0].rest_name+'\'s Restaurant</span>';
               document.querySelector('#restimg').innerHTML = restphoto;
               //console.log(filtered[0].rest_name);
 
