@@ -72,8 +72,8 @@ a {
     }
 
    .rat-stars-x img{
-        width: 60%;
-        height:60%;
+        width: 50%;
+        height:50%;
       }
      @media only screen and (min-width: 600px) {
     .card {
@@ -190,8 +190,8 @@ iron-pages:not([style-scope]):not(.style-scope){
   margin-left: auto;
 }
 .rat-stars img {
-  width:120px;
-  height: 20px;
+  width:50%;
+  height: 50%;
 }
 .fill_star{
   font-size: 2em;

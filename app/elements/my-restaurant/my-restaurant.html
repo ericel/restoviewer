@@ -41,7 +41,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       <span  id="ratingstars"></span>
       </p>
       <p><iron-icon prefix icon="maps:place"></iron-icon> <span id="address"></span></p>
-      <p><iron-icon prefix icon="date-range"></iron-icon> <span tabindex="0" aria-label="Mondays - Saturdays: 9AM to 10pm">Mons - Sats: 9AM ~ 10pm</span></p>
+      <p><iron-icon prefix icon="date-range"></iron-icon> <span  aria-label="Mondays - Saturdays: 9AM to 10pm">Mons - Sats: 9AM ~ 10pm</span></p>
        
       </div>
     </div>
@@ -185,7 +185,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 }
               var restphoto = '<img tabindex="0" class="resto-img" id="'+filtered[0].rest_name+' restaurant" src="https://restoviewer.firebaseapp.com/images/'+filtered[0].rest_photo+'.jpg" alt="'+filtered[0].rest_name+'">';
               document.querySelector('#ratingstars').innerHTML = '<span class="rat-stars-x" tabindex="0" aria-label="'+filtered[0].rest_rating+'">'+ratstar+'<span>';
-              document.querySelector('#address').innerHTML = '<span tabindex="0" aria-label="'+filtered[0].rest_address+'">'+filtered[0].rest_address+'</span>';
+              document.querySelector('#address').innerHTML = '<span aria-label="'+filtered[0].rest_address+'">'+filtered[0].rest_address+'</span>';
               document.querySelector('#restname').innerHTML = '<span tabindex="0" aria-label="'+filtered[0].rest_name+' restaurant" >'+filtered[0].rest_name+'\'s Restaurant</span>';
               document.querySelector('#restimg').innerHTML = restphoto;
               //console.log(filtered[0].rest_name);
