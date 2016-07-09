@@ -295,3 +295,11 @@ label{
 .paper-toast-0 a{
   color:#ffffff;
 }
+ .resto-photo{
+      height: 150px;
+      overflow: hidden;
+}
+.resto-photo img {
+      width: 100%;
+      height:auto;
+}
